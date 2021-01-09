@@ -4,6 +4,7 @@
 */
 #include<stdio.h>
 #include<malloc.h>
+#include<stdlib.h>
 
 typedef int element;
 typedef struct ListNode {
@@ -54,21 +55,22 @@ void removeNode(ListNode **phead, ListNode *p) {
 void displayList(ListNode *phead) {
 	ListNode *p = phead;
 
-	while(p != NULL){
+	while(p != NULL) {
 		printf("%d ", p->data);
 		p = p->link;
 	}
+	printf("\n");
 };
 
 int main() {
 
-	ListNode *list;
+	ListNode *list = NULL;
 	insertNode(&list, NULL, createNode(10, NULL));
 	insertNode(&list, NULL, createNode(20, NULL));
 	insertNode(&list, NULL, createNode(30, NULL));
 	insertNode(&list, NULL, createNode(40, NULL));
 	insertNode(&list, NULL, createNode(50, NULL));
-
+	displayList(list);
 	removeNode(&list, NULL);
 	displayList(list);
 	return 0;
