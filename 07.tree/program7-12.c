@@ -19,9 +19,14 @@ typedef struct TreeNode{
 
 TreeNode *createNode(element item) {
 	TreeNode *new = (TreeNode *)malloc(sizeof(TreeNode));
-	new->item = item;
-	new->left = NULL;
-	new->right = NULL;
+	if (new == NULL) {
+		printf("memory error");
+		new = NULL;
+	} else {
+		new->item = item;
+		new->left = NULL;
+		new->right = NULL;
+	}
 
 	return new;
 }
