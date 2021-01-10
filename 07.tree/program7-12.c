@@ -52,6 +52,16 @@ int main() {
 		help();
 		command = getchar();
 		fflush(stdin);
+		switch (command) {
+			case 'i' :
+				break;
+			case 'd' :
+				break;
+			case 's' :
+				break;
+			case 'p' : 
+				break;
+		}
 	} while(command != 'q');
 
 	return 0;
