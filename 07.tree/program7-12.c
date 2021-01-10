@@ -35,8 +35,30 @@ int compare(element e1, element e2) {
 	return strcmp(e1.word, e2.word);
 }
 
+TreeNode *search(TreeNode *phead, element targetWord) {
+	TreeNode *p = phead, *resultNode = NULL;
+
+	while (p != NULL) {
+		if (compare(p->item, targetWord) < 0) {
+			p=p->right;
+		} else if (compare(p->item, targetWord) > 0){
+			p=p->left;
+		} else {
+			resultNode = p;
+			break;
+		}
+	}
+	return resultNode;
+}
+
 void insertNode(TreeNode **phead, TreeNode *newNode) {
 	TreeNode *p = NULL, *t = *phead;
+	
+	if (search(*phead, newNode->item) != NULL) {
+		printf("already exist\n");
+		free(newNode);
+		return;
+	}
 
 	while (t != NULL) {
 		p = t;
@@ -84,6 +106,7 @@ int main() {
 	char command;
 	element e;
 	TreeNode *dictonary=NULL;
+	TreeNode *temp = NULL;
 
 	do {
 		help();
@@ -100,6 +123,14 @@ int main() {
 			case 'd' :
 				break;
 			case 's' :
+				printf("want find word : ");
+				gets(e.word);
+				temp = search(dictonary, e);
+				if (temp == NULL) {
+					printf("No exist");
+				} else {
+					printf("meaning : %s\n", temp->item.word);
+				}
 				break;
 			case 'p' : 
 				display(dictonary);
