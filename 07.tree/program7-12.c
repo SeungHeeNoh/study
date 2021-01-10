@@ -35,6 +35,41 @@ int compare(element e1, element e2) {
 	return strcmp(e1.word, e2.word);
 }
 
+void insertNode(TreeNode **phead, TreeNode *newNode) {
+	TreeNode *p = NULL, *t = *phead;
+
+	while (t != NULL) {
+		p = t;
+		if (compare(t->item, newNode->item) < 0) {
+			t=t->right;
+		} else {
+			t=t->left;
+		}
+	}
+
+	if (p == NULL) {
+		*phead = newNode;
+	} else {
+		printf("%d", compare(p->item, newNode->item));
+		if (compare(p->item, newNode->item) < 0) {
+			p->right = newNode;
+		} else {
+			p->left = newNode;
+		}
+	}
+}
+
+void display(TreeNode *phead){
+	TreeNode *p = phead;
+
+	if(p != NULL) {
+		display(p->left);
+		printf("%s", p->item.word);
+		printf("\n");
+		display(p->right);
+	}
+}
+
 void help() {
 	printf("*******************\n");
 	printf("i: input\n");
@@ -47,6 +82,8 @@ void help() {
 
 int main() {
 	char command;
+	element e;
+	TreeNode *dictonary=NULL;
 
 	do {
 		help();
@@ -54,12 +91,18 @@ int main() {
 		fflush(stdin);
 		switch (command) {
 			case 'i' :
+				printf("word :");
+				gets(e.word);
+				printf("meaning : ");
+				gets(e.meaning);
+				insertNode(&dictonary, createNode(e));
 				break;
 			case 'd' :
 				break;
 			case 's' :
 				break;
 			case 'p' : 
+				display(dictonary);
 				break;
 		}
 	} while(command != 'q');
