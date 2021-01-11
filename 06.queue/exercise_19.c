@@ -51,6 +51,19 @@ ResultData dequeue(QueueType *q) {
 	return rd;
 }
 
+int getCount(QueueType *q) {
+	int count = 0;
+	int front = (q->front+1) % MAX_QUEUE_SIZE,
+		rear = q->rear;
+
+	while(front <= rear) {
+		count++;
+		front++;
+	}
+
+	return count;
+}
+
 void display(QueueType *q) {
 	int front = (q->front+1) % MAX_QUEUE_SIZE,
 		rear = q->rear;
@@ -71,10 +84,12 @@ int main() {
 	enqueue(&q, -1);
 
 	display(&q);
+	printf("Queue item count : %d\n", getCount(&q));
 	temp = dequeue(&q);
 	if (temp.bool) {
 		printf("dequeue : %d\n", temp.result);
 	}
 	display(&q);
+	printf("Queue item count : %d\n", getCount(&q));
 	return 0;
 }
