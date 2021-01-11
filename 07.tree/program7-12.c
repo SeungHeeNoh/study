@@ -81,6 +81,59 @@ void insertNode(TreeNode **phead, TreeNode *newNode) {
 	}
 }
 
+int deleteNode(TreeNode **phead, element targetWord) {
+	TreeNode *p = NULL, *child = NULL,  *succ, *succ_p, *t = *phead;
+	while (t != NULL && (compare(t->item, targetWord) != 0)) {
+		p = t;
+		if (compare(t->item, targetWord) < 0) {
+			t = t->right;
+		} else if (compare(t->item, targetWord) > 0){
+			t = t->left;
+		}
+	}
+
+	if (t->left == NULL && t->right == NULL) {
+		if (p != NULL) {
+			if (p->left == t) {
+				p->left = NULL;
+			} else {
+				p->right = NULL;
+			}
+		} else {
+			*phead = NULL;
+		}
+	} else if (t->left == NULL || t->right == NULL) {
+		child = (t->left != NULL) ? t->left : t->right;
+		if (p != NULL) {
+			if (p->left == t) {
+				p->left = child;
+			} else {
+				p->right = child;
+			}
+		} else {
+			*phead = child;
+		}
+	} else {
+		succ_p = t;
+		succ = t->right;
+
+		while(succ->left != NULL) {
+			succ_p = succ;
+			succ = succ->left;
+		}
+
+		if (succ_p->left == succ) {
+			succ_p->left = succ->right;
+		} else {
+			succ_p->right = succ->right;
+		}
+
+		t->item = succ->item;
+		t = succ;
+	}
+	free(t);
+}
+
 void display(TreeNode *phead){
 	TreeNode *p = phead;
 
@@ -121,13 +174,22 @@ int main() {
 				insertNode(&dictonary, createNode(e));
 				break;
 			case 'd' :
+				printf("want delete word : ");
+				gets(e.word);
+				temp = search(dictonary, e);
+				if (temp == NULL) {
+					printf("No exist");
+				} else {
+					deleteNode(&dictonary, e);
+					printf("deleted.\n");
+				}
 				break;
 			case 's' :
 				printf("want find word : ");
 				gets(e.word);
 				temp = search(dictonary, e);
 				if (temp == NULL) {
-					printf("No exist");
+					printf("No exist\n");
 				} else {
 					printf("meaning : %s\n", temp->item.word);
 				}
