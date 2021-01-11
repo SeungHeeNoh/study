@@ -66,6 +66,18 @@ ResultData dequeue(QueueType *q) {
 	return rd;
 }
 
+int getCount(QueueType *q) {
+	int count = 0;
+	QueueNode *p = q->front;
+
+	while(p != NULL) {
+		count++;
+		p=p->link;
+	}
+
+	return count;
+}
+
 void display(QueueType *q) {
 	QueueNode *p = q->front;
 
@@ -86,11 +98,13 @@ int main() {
 	enqueue(&queue, createNode(20));
 	enqueue(&queue, createNode(30));
 	display(&queue);
+	printf("Queue item count : %d\n", getCount(&queue));
 	temp = dequeue(&queue);
 	if (temp.bool != 0) {
 		printf("dequeue item : %d\n", temp.data);
 	}
 	display(&queue);
+	printf("Queue item count : %d\n", getCount(&queue));
 
 	return 0;
 }
