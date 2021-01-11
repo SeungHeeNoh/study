@@ -19,10 +19,36 @@ int isEmpty(QueueType *q) {
 	return (q->front == q->rear);
 }
 
+int isFull(QueueType *q) {
+	return (q->front == ((q->rear+1) % MAX_QUEUE_SIZE));
+}
+
+void enqueue(QueueType *q, element item) {
+	if (isFull(q)) {
+		printf("Queue is Full.");
+		return;
+	}
+	q->rear = (q->rear+1) % MAX_QUEUE_SIZE;
+	q->array[q->rear] = item;
+}
+
+void display(QueueType *q) {
+	int front = (q->front+1) % MAX_QUEUE_SIZE,
+		rear = q->rear;
+
+	while(front <= rear) {
+		printf("%d ", q->array[(front++) % MAX_QUEUE_SIZE]);
+	}
+}
 
 int main() {
 	QueueType q;
-	init(&q);
 
+	init(&q);
+	enqueue(&q, 10);
+	enqueue(&q, 20);
+	enqueue(&q, 30);
+
+	display(&q);
 	return 0;
 }
