@@ -53,12 +53,6 @@ TreeNode *search(TreeNode *phead, element targetWord) {
 
 void insertNode(TreeNode **phead, TreeNode *newNode) {
 	TreeNode *p = NULL, *t = *phead;
-	
-	if (search(*phead, newNode->item) != NULL) {
-		printf("already exist\n");
-		free(newNode);
-		return;
-	}
 
 	while (t != NULL) {
 		p = t;
@@ -171,7 +165,12 @@ int main() {
 				gets(e.word);
 				printf("meaning : ");
 				gets(e.meaning);
-				insertNode(&dictonary, createNode(e));
+				temp = search(dictonary, e);
+				if (temp == NULL) {
+					insertNode(&dictonary, createNode(e));
+				} else {
+					printf("already exist\n");
+				}
 				break;
 			case 'd' :
 				printf("want delete word : ");
