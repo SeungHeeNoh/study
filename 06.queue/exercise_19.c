@@ -9,6 +9,10 @@ typedef struct QueueType{
 	element array[MAX_QUEUE_SIZE];
 	int front, rear;
 }QueueType;
+typedef struct ResultData{
+	int bool;
+	element result;
+}ResultData;
 
 void init(QueueType *q) {
 	q->front = 0;
@@ -32,6 +36,21 @@ void enqueue(QueueType *q, element item) {
 	q->array[q->rear] = item;
 }
 
+ResultData dequeue(QueueType *q) {
+	ResultData rd;
+
+	if (isEmpty(q)) {
+		printf("Queue is Empty");
+		rd.bool = 0;
+		rd.result = 0;
+	} else {
+		q->front = (q->front+1) % MAX_QUEUE_SIZE;
+		rd.bool = 1;
+		rd.result = q->array[q->front];
+	}
+	return rd;
+}
+
 void display(QueueType *q) {
 	int front = (q->front+1) % MAX_QUEUE_SIZE,
 		rear = q->rear;
@@ -39,16 +58,23 @@ void display(QueueType *q) {
 	while(front <= rear) {
 		printf("%d ", q->array[(front++) % MAX_QUEUE_SIZE]);
 	}
+	printf("\n");
 }
 
 int main() {
 	QueueType q;
+	ResultData temp;
 
 	init(&q);
 	enqueue(&q, 10);
 	enqueue(&q, 20);
-	enqueue(&q, 30);
+	enqueue(&q, -1);
 
+	display(&q);
+	temp = dequeue(&q);
+	if (temp.bool) {
+		printf("dequeue : %d\n", temp.result);
+	}
 	display(&q);
 	return 0;
 }
