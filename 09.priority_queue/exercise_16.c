@@ -59,19 +59,53 @@ void display(HeapType *h) {
 }
 
 int main() {
-	HeapType ht;
+	HeapType ht1, ht2, ht3;
 	element e1 = {50}, e2 = {90}, e3 = {30}, e4 = {70}, e5 = {10};
-	init(&ht);
-	insert(&ht, e1);
-	insert(&ht, e2);
-	insert(&ht, e3);
-	insert(&ht, e4);
-	insert(&ht, e5);
 
-	delete(&ht);
+	/*test1 : 중간에 우선순위가 높은 노드가 존재할 때 제거가 잘 이루어지는가?*/
+	printf("test1\n");
+	init(&ht1);
+	insert(&ht1, e1);
+	insert(&ht1, e2);
+	insert(&ht1, e3);
+	insert(&ht1, e4);
+	insert(&ht1, e5);
+	display(&ht1);
 
-	display(&ht);
-	printf("%d", ht.heap_size);
+	printf("After delete : ");
+	delete(&ht1);
+	display(&ht1);
+	printf("\n");
 
+
+	/*test2 : 가장 처음에 우선순위가 높은 노드가 존재할 때 제거가 잘 이루어지는가?*/
+	printf("test2\n");
+	init(&ht2);
+	insert(&ht2, e2);
+	insert(&ht2, e1);
+	insert(&ht2, e3);
+	insert(&ht2, e4);
+	insert(&ht2, e5);
+	display(&ht2);
+
+	printf("After delete : ");
+	delete(&ht2);
+	display(&ht2);
+	printf("\n");
+
+	/*test3 : 가장 마지막에 우선순위가 높은 노드가 존재할 때 제거가 잘 이루어지는가?*/
+	printf("test3\n");
+	init(&ht3);
+	insert(&ht3, e1);
+	insert(&ht3, e5);
+	insert(&ht3, e3);
+	insert(&ht3, e4);
+	insert(&ht3, e2);
+	display(&ht3);
+
+	printf("After delete : ");
+	delete(&ht3);
+	display(&ht3);
+	printf("\n");
 	return 0;
 }
