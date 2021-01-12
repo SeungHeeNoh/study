@@ -60,12 +60,14 @@ void delete(PriorityType **phead) {
 		p=n;
 		n=n->link;
 	}
-	
-	if (p == NULL) {
-		*phead = removed->link;
-	} else {
-		removedPrev->link = removed->link;
+	if (removed != NULL) {
+		if (removedPrev == NULL) {
+			*phead = removed->link;
+		} else {
+			removedPrev->link = removed->link;
+		}
 	}
+	
 	free(removed);
 };
 
@@ -79,16 +81,50 @@ void display(PriorityType *phead) {
 	printf("\n");
 }
 int main() {
-	PriorityType *pt = NULL;
+	// /*test1 : 중간에 우선순위가 높은 노드가 존재할 때 제거가 잘 이루어지는가?*/
+	PriorityType *pt1 = NULL;
+	printf("test1\n");
+	insert(&pt1, createNode(10));
+	insert(&pt1, createNode(80));
+	insert(&pt1, createNode(50));
+	insert(&pt1, createNode(0));
+	insert(&pt1, createNode(70));
+	display(pt1);
 
-	insert(&pt, createNode(10));
-	insert(&pt, createNode(80));
-	insert(&pt, createNode(50));
-	insert(&pt, createNode(0));
-	insert(&pt, createNode(70));
-	display(pt);
+	printf("After delete : ");
+	delete(&pt1);
+	display(pt1);
+	printf("\n");
 
-	delete(&pt);
-	display(pt);
+	/*test2 : 가장 처음에 우선순위가 높은 노드가 존재할 때 제거가 잘 이루어지는가?*/
+	PriorityType *pt2 = NULL;
+	printf("test2\n");
+	insert(&pt2, createNode(80));
+	insert(&pt2, createNode(10));
+	insert(&pt2, createNode(50));
+	insert(&pt2, createNode(0));
+	insert(&pt2, createNode(70));
+	display(pt2);
+
+	printf("After delete : ");
+	delete(&pt2);
+	display(pt2);
+	printf("\n");
+
+	/*test3 : 가장 마지막에 우선순위가 높은 노드가 존재할 때 제거가 잘 이루어지는가?*/
+	PriorityType *pt3 = NULL;
+	printf("test3\n");
+	insert(&pt3, createNode(80));
+	insert(&pt3, createNode(10));
+	insert(&pt3, createNode(50));
+	insert(&pt3, createNode(0));
+	insert(&pt3, createNode(90));
+	display(pt3);
+
+	printf("After delete : ");
+	delete(&pt3);
+	display(pt3);
+	printf("\n");
+
 	return 0;
 }
