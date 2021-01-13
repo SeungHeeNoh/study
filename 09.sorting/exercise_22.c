@@ -25,14 +25,13 @@ void allDisplay(SortNode *s, int start1, int end1, int start2, int end2) {
 }
 
 void selectionSort(SortNode *s) {
-	int min = 10000, minIdx = 0, temp = 0;
+	int minIdx = 0, temp = 0;
 	allDisplay(s, 0, 0, 0, s->length);
 
 	for (int i = 0; i<s->length-1; i++) {
-		min = 10000;
-		for (int j=i; j<s->length; j++) {
-			if (min > s->arr[j]) {
-				min = s->arr[j];
+		minIdx = i;
+		for (int j=i+1; j<s->length; j++) {
+			if (s->arr[minIdx] > s->arr[j]) {
 				minIdx = j;
 			}
 		}
@@ -43,6 +42,7 @@ void selectionSort(SortNode *s) {
 		}
 		allDisplay(s, 0, i+1, i+1, s->length);
 	}
+	allDisplay(s, 0, s->length, 0, 0);
 }
 
 int main() {
