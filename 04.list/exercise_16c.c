@@ -52,6 +52,22 @@ void removeNode(ListNode **phead, ListNode *p) {
 
 void removeTargetData(ListNode **phead, int targetData) {
 	ListNode *p, *prev = NULL;
+	p = *phead;
+
+	while(p != NULL) {
+		if (targetData == p->data) {
+			removeNode(phead, prev);
+
+			// p가 가리키던 노드가 free상태가 되어 p가 쓰레기값을 가리키기 때문에 삭제가 발생하면 p를 재선언해서 사용해야 한다.
+			if (prev == NULL) {
+				p = *phead;
+			} else {
+				p = prev->link;
+			}
+		}
+		prev = p;
+		p=p->link;
+	}
 }
 
 void displayList(ListNode *phead) {
@@ -74,8 +90,7 @@ int main() {
 	insertNode(&list, NULL, createNode(50, NULL));
 	insertNode(&list, NULL, createNode(20, NULL));
 	displayList(list);
-	removeNode(&list, NULL);
-	// removeTargetData(&list, 20);
+	removeTargetData(&list, 20);
 	displayList(list);
 	return 0;
 }
