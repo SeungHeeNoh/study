@@ -79,20 +79,40 @@ void display(StackNode *head) {
 	}
 }
 
+int findPath(StackNode *s, int row, int col) {
+	element here;
+	here.row = row; here.col = col;
+
+	while (maze[here.row][here.col] != 'x') {
+		row = here.row;
+		col = here.col;
+		maze[here.row][here.col] = '.';
+		printf("path = (%d, %d)\n", row, col);
+
+		insertStack(&s, createNode(row-1, col));
+		insertStack(&s, createNode(row+1, col));
+		insertStack(&s, createNode(row, col-1));
+		insertStack(&s, createNode(row, col+1));
+		// display(s);
+
+		if (isEmpty(s)) {
+			return 0;
+		} else {
+			here = deleteStack(&s);
+		}
+	}
+	printf("path = (%d, %d)\n", here.row, here.col);
+	return 1;
+}
+
 int main() {
 	StackNode *s = NULL;
+	int startRow = 1, startCol = 0;
 
-	insertStack(&s, createNode(1, 1));
-	insertStack(&s, createNode(2, 1));
-	insertStack(&s, createNode(1, 4));
-	insertStack(&s, createNode(5, 1));
-	display(s);
-
-	deleteStack(&s);
-	deleteStack(&s);
-	deleteStack(&s);
-	deleteStack(&s);
-	deleteStack(&s);
-	display(s);
+	if (findPath(s, startRow, startCol)) {
+		printf("Find Path Complete!\n");
+	} else {
+		printf("Failed to find path.\n");
+	}
 	return 0;
 }
