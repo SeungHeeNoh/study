@@ -26,7 +26,7 @@ int isFull(QueueData *qd) {
 	return (qd->rear == qd->front && qd->lastOp == 'i');
 }
 
-void insert(QueueData *qd, int data) {
+void enqueue(QueueData *qd, int data) {
 	if (!isFull(qd)) {
 		qd->rear = (qd->rear+1) % MAX_SIZE;
 		qd->arr[qd->rear] = data;
@@ -36,7 +36,7 @@ void insert(QueueData *qd, int data) {
 	}
 }
 
-int delete(QueueData *qd) {
+int dequeue(QueueData *qd) {
 	int deleteData = 0;
 
 	if (!isEmpty(qd)) {
@@ -55,11 +55,11 @@ int main() {
 	init(&test1);
 
 	for(int i=0; i<MAX_SIZE+2; i++) {
-		insert(&test1, 10 * i);
+		enqueue(&test1, 10 * i);
 	}
 
 	for(int i=0; i<MAX_SIZE+1; i++) {
-		delete(&test1);
+		dequeue(&test1);
 	}
 	
 	return 0;
