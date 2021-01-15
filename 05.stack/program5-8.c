@@ -5,9 +5,12 @@
 #include<malloc.h>
 
 #define MAZE_SIZE 6
-typedef struct StackNode {
+typedef struct element {
 	int row;
 	int col;
+}element;
+typedef struct StackNode {
+	element data;
 	struct StackNode *link;
 }StackNode;
 
@@ -23,14 +26,26 @@ char maze[MAZE_SIZE][MAZE_SIZE] = {
 StackNode *createNode(int row, int col) {
 	StackNode *newNode = (StackNode *)malloc(sizeof(StackNode));
 
-	newNode->row = row;
-	newNode->col = col;
+	newNode->data.row = row;
+	newNode->data.col = col;
 	newNode->link = NULL;
 
 	return newNode;
 }
 
+int isEmpty(StackNode *s) {
+	return (s == NULL);
+}
+
+int checkData(element data) {
+	if (data.row < 0 || data.col < 0) return 1;
+	if (maze[data.row][data.col] == '.' || maze[data.row][data.col] == '1') return 1;
+	return 0;
+}
+
 void insertStack(StackNode **head, StackNode *newNode) {
+	if (checkData(newNode->data)) return ;
+
 	if (*head == NULL) {
 		*head = newNode;
 	} else {
@@ -39,15 +54,19 @@ void insertStack(StackNode **head, StackNode *newNode) {
 	}
 }
 
-void deleteStack(StackNode **head) {
+element deleteStack(StackNode **head) {
+	StackNode *removed = NULL;
+	element point;
+
 	if (*head == NULL) {
 		printf("Underflow Occured.\n");
 	} else {
-		StackNode *removed = NULL;
 		removed = *head;
 		*head = removed->link;
-		printf("(%d, %d) removed.\n", removed->row, removed->col);
+		point = removed->data;
 		free(removed);
+
+		return point;
 	}
 }
 
@@ -55,7 +74,7 @@ void display(StackNode *head) {
 	StackNode *p = head;
 
 	while (p != NULL) {
-		printf("(%d, %d)\n", p->row, p->col);
+		printf("(%d, %d)\n", p->data.row, p->data.col);
 		p = p->link;
 	}
 }
