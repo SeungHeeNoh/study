@@ -30,6 +30,10 @@ void init(QueueType *q) {
 	q->rear = NULL;
 }
 
+int isEmpty(QueueType *q) {
+	return q->front == NULL;
+}
+
 void enqueue(QueueType *q, QueueNode *new) {
 	if (q->front == NULL) {
 		q->front = q->rear = new;
@@ -46,6 +50,10 @@ void dequeue(QueueType *q) {
 		QueueNode *removed;
 		removed = q->front;
 		q->front = removed->link;
+
+		if (isEmpty(q)) {
+			q->rear = NULL;
+		}
 		free(removed);
 	}
 }
