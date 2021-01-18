@@ -4,6 +4,7 @@
 */
 #include<stdio.h>
 #include<malloc.h>
+#include<stdlib.h>
 
 #define MAX_SIZE 100
 
@@ -16,8 +17,11 @@ typedef struct TreeNode {
 
 TreeNode *createNode(int data) {
 	TreeNode *newNode = (TreeNode *)malloc(sizeof(TreeNode));
-	newNode->data = data;
-	newNode->left = newNode->right = NULL;
+	if (newNode != NULL) {
+		newNode->data = data;
+		newNode->left = newNode->right = NULL;
+	}
+
 	return newNode;
 }
 
@@ -43,7 +47,7 @@ void insertNode(TreeNode **t, int data) {
 	while (n != NULL) {
 		if (n->data == data) {
 			printf("Already exist.\n");
-			return;
+			break;
 		}
 		p = n;
 		if (n->data < data) {
@@ -54,6 +58,10 @@ void insertNode(TreeNode **t, int data) {
 	}
 
 	newNode = createNode(data);
+	if (newNode == NULL) {
+		printf("Allocation Failed.\n");
+		exit(1);
+	}
 	if (p != NULL) {
 		if (p->data < newNode->data) {
 			p->right = newNode;
@@ -66,17 +74,19 @@ void insertNode(TreeNode **t, int data) {
 }
 
 void display(TreeNode *t) {
-	if (t == NULL) return;
-	display(t->left);
-	printf("%d ", t->data);
-	display(t->right);
+	if (t != NULL) {
+		display(t->left);
+		printf("%d ", t->data);
+		display(t->right);
+	}
 }
 
 void *sort(TreeNode *t) {
-	if (t == NULL) return 0;
-	sort(t->left);
-	result[idx++] = t->data; 
-	sort(t->right);
+	if (t != NULL) {
+		sort(t->left);
+		result[idx++] = t->data; 
+		sort(t->right);
+	}
 }
 
 int main() {
