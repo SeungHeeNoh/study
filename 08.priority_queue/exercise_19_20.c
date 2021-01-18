@@ -4,7 +4,7 @@
 */
 #include<stdio.h>
 #include<stdlib.h>
-#define MAX_SIZE 100
+#define MAX_SIZE 21
 
 typedef struct HeapType {
 	int array[MAX_SIZE];
@@ -13,6 +13,14 @@ typedef struct HeapType {
 
 void init(HeapType *h) {
 	h->length = 0;
+}
+
+int isEmpty(HeapType h) {
+	return (h.length == 0);
+}
+
+int isFull(HeapType h) {
+	return (h.length == (MAX_SIZE-1));
 }
 
 void insert(HeapType *h, int data) {
@@ -60,10 +68,13 @@ void display(HeapType h) {
 }
 
 int main() {
+	printf("-----test1-----\n");
 	HeapType test1;
 	int arr1[MAX_SIZE] = {10, 5, 6, 13, 15, 8, 14, 7, 12, 4};
 
 	init(&test1);
+	printf("Is Empty : %s\n", isEmpty(test1) ? "true" : "false");
+	printf("IS Full : %s\n", isFull(test1) ? "true" : "false");
 	for (int i=0; i<10; i++) {
 		insert(&test1, arr1[i]);
 	}
@@ -72,7 +83,24 @@ int main() {
 	printf("delete : %d\n", delete(&test1));
 	printf("delete : %d\n", delete(&test1));
 	display(test1);
+	printf("\n");
 
+	printf("-----test2-----\n");
+	HeapType test2;
+	int arr2[MAX_SIZE] = {10, 1, 17, 25, 6, 13, 27, 15, 18, 8, 14, 7, 12, 4, 20, 30, 11, 3, 22, 60};
+
+	init(&test2);
+	for (int i=0; i<20; i++) {
+		insert(&test2, arr2[i]);
+	}
+	display(test2);
+	printf("\n");
+	printf("Is Empty : %s\n", isEmpty(test2) ? "true" : "false");
+	printf("IS Full : %s\n", isFull(test2) ? "true" : "false");
+	printf("delete : %d\n", delete(&test2));
+	printf("delete : %d\n", delete(&test2));
+	display(test2);
+	printf("\n");
 
 	return 0;
 }
