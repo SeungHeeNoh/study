@@ -23,6 +23,13 @@ int isFull(HeapType h) {
 	return (h.length == (MAX_SIZE-1));
 }
 
+int find(HeapType h, int data) {
+	for (int i=1; i<=h.length; i++) {
+		if (h.array[i] == data) return 1;
+	}
+	return 0;
+}
+
 void insert(HeapType *h, int data) {
 	int idx;
 
@@ -80,10 +87,12 @@ int main() {
 	}
 	display(test1);
 	printf("\n");
+	printf("find %d: %s\n", 5, find(test1, 5) ? "true" : "false");
 	printf("delete : %d\n", delete(&test1));
 	printf("delete : %d\n", delete(&test1));
 	display(test1);
 	printf("\n");
+	printf("find %d: %s\n", 5, find(test1, 5) ? "true" : "false");
 
 	printf("-----test2-----\n");
 	HeapType test2;
@@ -99,6 +108,7 @@ int main() {
 	printf("IS Full : %s\n", isFull(test2) ? "true" : "false");
 	printf("delete : %d\n", delete(&test2));
 	printf("delete : %d\n", delete(&test2));
+	printf("find %d: %s\n", 11, find(test2, 11) ? "true" : "false");
 	display(test2);
 	printf("\n");
 
