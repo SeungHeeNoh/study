@@ -28,6 +28,31 @@ void insert(HeapType *h, int data) {
 	h->array[idx] = data;
 }
 
+int delete(HeapType *h) {
+	int min = 0, temp = 0, removed = h->array[1];
+	int parent = 1, child = 2;
+
+	if (h->length == 0) {
+		printf("Already Empty.\n");
+		return 0;
+	}
+	
+	temp = h->array[h->length];
+	h->length -= 1;
+
+	while (child <= h->length) {
+		if (child < h->length && h->array[child] > h->array[child+1]) {
+			child++;
+		}
+		if (temp <= h->array[child]) break;
+		h->array[parent] = h->array[child];
+		parent = child;
+		child *= 2;
+	}
+	h->array[parent] = temp;
+	return removed;
+}
+
 void display(HeapType h) {
 	for(int i=1; i<=h.length; i++) {
 		printf("%d ", h.array[i]);
@@ -42,6 +67,10 @@ int main() {
 	for (int i=0; i<10; i++) {
 		insert(&test1, arr1[i]);
 	}
+	display(test1);
+	printf("\n");
+	printf("delete : %d\n", delete(&test1));
+	printf("delete : %d\n", delete(&test1));
 	display(test1);
 
 
