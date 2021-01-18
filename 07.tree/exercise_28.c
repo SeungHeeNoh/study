@@ -25,21 +25,6 @@ TreeNode *createNode(int data) {
 	return newNode;
 }
 
-int search(TreeNode *t, int data) {
-	TreeNode *p = t;
-
-	while (p != NULL) {
-		if (p->data == data) {
-			return 1;
-		} else if (p->data < data) {
-			p = p->right;
-		} else {
-			p = p->left;
-		}
-	}
-	return 0;
-}
-
 void insertNode(TreeNode **t, int data) {
 	TreeNode *p = NULL, *n = *t;
 	TreeNode *newNode;
@@ -47,7 +32,7 @@ void insertNode(TreeNode **t, int data) {
 	while (n != NULL) {
 		if (n->data == data) {
 			printf("Already exist.\n");
-			break;
+			return;
 		}
 		p = n;
 		if (n->data < data) {
