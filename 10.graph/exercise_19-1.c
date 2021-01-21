@@ -3,19 +3,25 @@
 */
 #include<stdio.h>
 
-#define VERTICES 4
+#define VERTICES 10
 int selected[VERTICES];
 int adj[VERTICES][VERTICES] = {
-	{0, 1, 1, 1},
-	{1, 0, 1, 1},
-	{1, 1, 0, 1},
-	{1, 1, 1, 0}
+	{0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+	{1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+	{0, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+	{0, 1, 0, 0, 1, 1, 0, 0, 0, 0},
+	{0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 1, 0, 0, 1, 1, 0, 0},
+	{0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
+	{0, 0, 0, 0, 0, 1, 1, 0, 1, 1},
+	{0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
 };
 
 
 void init(){
 	for(int i=0; i<VERTICES; i++){
-		selected[VERTICES]=0;
+		selected[i]=0;
 	}
 }
 
@@ -32,5 +38,12 @@ void depth_first_search(int n){
 
 void main(){
 	init();
-	depth_first_search(0);
+	printf("-----test1 : 20-1-----\n");
+	depth_first_search(3);
+	printf("\n");
+
+	printf("-----test2 : 20-2-----\n");
+	init();
+	depth_first_search(6);
+	printf("\n");
 }
