@@ -3,7 +3,7 @@
 */
 #include<stdio.h>
 
-#define VERTICES 4
+#define VERTICES 10
 #define QUEUE_MAX 20
 typedef struct QueueType{
 	int queue[QUEUE_MAX];
@@ -13,10 +13,16 @@ typedef struct QueueType{
 
 int selected[VERTICES];
 int adj[VERTICES][VERTICES] = {
-	{0, 1, 1, 1},
-	{1, 0, 1, 1},
-	{1, 1, 0, 1},
-	{1, 1, 1, 0}
+	{0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+	{1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+	{0, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+	{0, 1, 0, 0, 1, 1, 0, 0, 0, 0},
+	{0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 1, 0, 0, 1, 1, 0, 0},
+	{0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
+	{0, 0, 0, 0, 0, 1, 1, 0, 1, 1},
+	{0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
 };
 
 void queueInit(QueueType *q){
@@ -46,11 +52,9 @@ int dequeue(QueueType *q){
 	if (isQueueEmpty(*q)) {
 		printf("Queue is Empty.\n");
 	} else {
-		q->queue[q->front];
 		q->front = (q->front+1)%QUEUE_MAX;
+		data = q->queue[q->front];
 	}
-	
-
 	return data;
 }
 
@@ -83,5 +87,12 @@ void breadth_first_search(int start){
 
 void main(){
 	init();
-	breadth_first_search(0);
+	printf("-----test1 : 20-3-----\n");
+	breadth_first_search(3);
+	printf("\n");
+
+	printf("-----test2 : 20-4-----\n");
+	init();
+	breadth_first_search(6);
+	printf("\n");
 }
