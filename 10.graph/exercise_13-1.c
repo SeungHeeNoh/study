@@ -32,7 +32,7 @@ void insertVertex(GraphType *g, int k) {
 }
 
 void insertEdge(GraphType *g, int u, int v, int weight) {
-	if (u < MAX_VERTICES && v < MAX_VERTICES) {
+	if (u < g->n && v < g->n) {
 		GraphNode *newNode;
 		newNode = (GraphNode *)malloc(sizeof(GraphNode));
 		newNode->vertex = v;
