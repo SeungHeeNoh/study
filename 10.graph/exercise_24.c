@@ -50,13 +50,17 @@ void prim(int n){
 		u=getMinVertex();
 		if (distance[u] == INF) return;
 		selected[u]=1;
-		printf("%d ", u);
+		printf("%d \n", u);
 
 		for(int j=0; j<VERTICES; j++){
 			if(!selected[j] && weight[u][j] != INF && distance[j] > weight[u][j]){
 				distance[j] = weight[u][j];
 			}
 		}
+		for(int i=0; i<VERTICES; i++){
+			printf("%d ", distance[i]);
+		}
+		printf("\n");
 	}
 }
 
