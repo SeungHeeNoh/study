@@ -7,7 +7,7 @@
 
 typedef struct element{
 	int value;
-	int deleted;
+	int used;
 	int full;
 }element;
 
@@ -17,7 +17,7 @@ typedef struct HashTable{
 
 void initTable(HashTable *ht){
 	for(int i=0; i<TABLE_SIZE; i++){
-		ht->table[i].value = ht->table[i].deleted = ht->table[i].full = 0;
+		ht->table[i].value = ht->table[i].used = ht->table[i].full = 0;
 	}
 }
 
@@ -61,7 +61,7 @@ void inputHashTable(HashTable *ht, element data){
 			if (!ht->table[step].full){
 				ht->table[step].value = data.value;
 				ht->table[step].full = 1;
-				ht->table[step].deleted = 1;
+				ht->table[step].used = 1;
 				break;
 			} else {
 				step =  ++step % TABLE_SIZE;
@@ -75,25 +75,52 @@ void inputHashTable(HashTable *ht, element data){
 	}
 }
 
-void search(HashTable *ht, element data){
+void deleteHashTable(HashTable *ht, element data){
 	int step, hashKey;
 	step = hashKey = data.value % 11;
 
-	if(isEmpty(*ht)){
+	if(isEmpty){
 		printf("Table is Empty.\n");
 		return;
-	} else{
+	}else{
 		while(1){
-			if(ht->table[step].deleted && ht->table[step].value == data.value){
-				printf("search success : %d\n", step);
-				break;
+			if(ht->table[step].full){
+
 			}else{
-				step = ++step % TABLE_SIZE;
-				if (step == hashKey){
-					printf("Data you are looking for is not exist in hashtable.\n");
-					return;
-				}
+
 			}
+		}
+	}
+}
+
+int find(HashTable ht, int data){
+	int step, hashKey, result = -1;
+	step = hashKey = data % 11;
+
+	while(1){
+		if(ht.table[step].used && ht.table[step].value == data){
+			result = step;
+			break;
+		}else{
+			step = ++step % TABLE_SIZE;
+			if (step == hashKey){
+				return -1;
+			}
+		}
+	}
+
+	return result;
+}
+
+void search(HashTable ht, element data){
+	if(isEmpty(ht)){
+		printf("Table is Empty.\n");
+	} else{
+		int result = find(ht, data.value);
+		if(result == -1) {
+			printf("Data you are looking for is not exist in hashtable.\n");
+		}else{
+			printf("search success : %d\n", result);
 		}
 	}
 }
@@ -116,7 +143,7 @@ void main(){
 		case 1:
 			printf("Enter the key ");
 			scanf("%d", &temp.value);
-			search(&test1, temp);
+			search(test1, temp);
 			break;
 		}
 
