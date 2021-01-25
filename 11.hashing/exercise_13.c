@@ -1,4 +1,6 @@
-/* 12, 44, 13, 88, 23, 94, 11, 39, 20, 16, 5*/
+/*
+	선형 조사법에서 탐색 키를 삭제하는 함수 hash_lp_delete(element item, element ht[])를 구현해보라.
+*/
 
 #include<stdio.h>
 
