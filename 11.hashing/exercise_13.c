@@ -17,7 +17,8 @@ typedef struct HashTable{
 
 void initTable(HashTable *ht){
 	for(int i=0; i<TABLE_SIZE; i++){
-		ht->table[i].value = ht->table[i].used = ht->table[i].full = 0;
+		ht->table[i].value = -1;
+		ht->table[i].used = ht->table[i].full = 0;
 	}
 }
 
@@ -79,15 +80,22 @@ void deleteHashTable(HashTable *ht, element data){
 	int step, hashKey;
 	step = hashKey = data.value % 11;
 
-	if(isEmpty){
+	if(isEmpty(*ht)){
 		printf("Table is Empty.\n");
 		return;
 	}else{
 		while(1){
-			if(ht->table[step].full){
-
+			if(ht->table[step].full && ht->table[step].value == data.value){
+				ht->table[step].value = -1;
+				ht->table[step].full = 0;
+				printf("delete success : %d\n", data.value);
+				break;
 			}else{
-
+				step = ++step % TABLE_SIZE;
+				if (step == hashKey || !ht->table[step].used){
+					printf("Data you want to delete is not exist in hashtable.\n");
+					return;
+				}
 			}
 		}
 	}
@@ -132,7 +140,7 @@ void main(){
 	initTable(&test1);
 
 	do{
-		printf("Enter the desired operation.(0=input, 1=search, 2=exit.) ");
+		printf("Enter the desired operation.(0=input, 1=delete, 2=search, 3=display, 4=exit.) ");
 		scanf("%d", &op);
 		switch (op){
 		case 0:
@@ -143,9 +151,16 @@ void main(){
 		case 1:
 			printf("Enter the key ");
 			scanf("%d", &temp.value);
+			deleteHashTable(&test1, temp);
+			break;
+		case 2:
+			printf("Enter the key ");
+			scanf("%d", &temp.value);
 			search(test1, temp);
 			break;
+		case 3:
+			display(test1);
 		}
 
-	}while(op != 2);
+	}while(op != 4);
 }
