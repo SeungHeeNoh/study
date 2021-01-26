@@ -99,16 +99,30 @@ void add(ListType *lt, element newData){
 	}
 }
 
-void delete(ListType *lt, element newData){
-	ListNode *deleteNode;
-
+void delete(ListType *lt, element deleteData){
 	if(isEmpty(*lt)) return;
 
-	deleteNode = find(lt, newData);
-	if(deleteNode == NULL){
+	if(find(lt, deleteData) == NULL){
 		printf("Data you want to delete is not eixist in List.\n");
 	}else{
-		// to do list;
+		ListNode *p = NULL, *n = lt->front;
+		lt->length -= 1;
+
+		while(n != NULL){
+			if(n->data == deleteData){
+				break;
+			}
+			p = n;
+			n = n->link;
+		}
+
+		if(p == NULL){
+			n = lt->front;
+			lt->front = n->link;
+		}else{
+			p->link =  n->link;
+		}
+		free(n);
 	}
 }
 
@@ -153,6 +167,14 @@ void main(){
 	printf("List Length? %d\n", getLength(test1));
 	isInList(test1, 17);
 	isInList(test1, 50);
+
+	// delete Test
+	delete(&test1, 0);
+	display(test1);
+	delete(&test1, 20);
+	display(test1);
+	delete(&test1, 10);
+	display(test1);
 
 	printf("-----------After clear function call-----------\n");
 	clear(&test1);
