@@ -29,8 +29,8 @@ int isEmpty(ListType lt){
 	return lt.length == 0;
 }
 
-void display(ListType *lt){
-	ListNode *p = lt->front;
+void display(ListType lt){
+	ListNode *p = lt.front;
 
 	while(p != NULL){
 		printf("%d ", p->data);
@@ -123,12 +123,12 @@ void clear(ListType *lt){
 	init(lt);
 }
 
-void isInList(ListType *lt, element targetData){
-	if(getLength(*lt) == 0){
+void isInList(ListType lt, element targetData){
+	if(getLength(lt) == 0){
 		printf("The List is Empty.\n");
 		return;
 	}
-	if(find(lt, targetData) == NULL){
+	if(find(&lt, targetData) == NULL){
 		printf("%d is not exist.\n", targetData);
 	}else{
 		printf("%d is exist.\n", targetData);
@@ -139,7 +139,7 @@ void isInList(ListType *lt, element targetData){
 void main(){
 	ListType test1;
 	init(&test1);
-	printf("is Empty? %d\n", isEmpty(test1));
+	printf("is Empty? %s\n", isEmpty(test1) ? "True" : "False");
 	printf("List Length? %d\n", getLength(test1));
 
 	add(&test1, 10);
@@ -148,11 +148,13 @@ void main(){
 	add(&test1, 17);
 	add(&test1, 0);
 	add(&test1, 10);
-	display(&test1);
-	printf("is Empty? %d\n", isEmpty(test1));
+	display(test1);
+	printf("is Empty? %s\n", isEmpty(test1) ? "True" : "False");
 	printf("List Length? %d\n", getLength(test1));
+	isInList(test1, 17);
+	isInList(test1, 50);
 
 	printf("-----------After clear function call-----------\n");
 	clear(&test1);
-	display(&test1);
+	display(test1);
 }
