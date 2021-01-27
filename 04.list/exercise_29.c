@@ -108,17 +108,17 @@ void isInList(ListNode *lt, element findData){
 	}
 }
 
-// void clear(ListNode lt){
-// 	ListNode *p = &lt, *removed = NULL;
+void clear(ListNode *lt){
+	ListNode *p = lt, *removed = NULL;
 
-// 	do{
-// 		removed = p;
-// 		p = p->right;
-// 		free(removed);
-// 	}while(p != &lt);
+	do{
+		removed = p;
+		p = p->right;
+		free(removed);
+	}while(p->right != lt);
 
-// 	init(&lt);
-// }
+	init(lt);
+}
 
 void main(){
 	ListNode test1;
@@ -137,4 +137,7 @@ void main(){
 	printf("List Length? %d\n", getLength(&test1));
 	isInList(&test1, 17);
 	isInList(&test1, 50);
+
+	clear(&test1);
+	display(&test1);
 }
