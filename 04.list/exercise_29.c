@@ -96,6 +96,22 @@ void add(ListNode *lt, element newData){
 	}
 }
 
+void delete(ListNode *lt, element removedData){
+	ListNode *removedNode = NULL;
+	if (isEmpty(lt)){
+		printf("Already Empty.\n");
+	}
+
+	removedNode = find(lt, removedData);
+	if(removedNode == NULL){
+		printf("%d is not exist in list.\n");
+	}else{
+		removedNode->left->right = removedNode->right;
+		removedNode->right->left = removedNode->left;
+		free(removedNode);
+	}
+}
+
 void isInList(ListNode *lt, element findData){
 	if(isEmpty(lt)){
 		printf("The List is Empty.\n");
@@ -137,6 +153,14 @@ void main(){
 	printf("List Length? %d\n", getLength(&test1));
 	isInList(&test1, 17);
 	isInList(&test1, 50);
+
+	// delete Test
+	delete(&test1, 0);
+	display(&test1);
+	delete(&test1, 20);
+	display(&test1);
+	delete(&test1, 10);
+	display(&test1);
 
 	clear(&test1);
 	display(&test1);
