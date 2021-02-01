@@ -4,7 +4,6 @@
 #include<stdio.h>
 
 #define MAX_SIZE 6
-#define SWAP(a, b) {int t; t = a; a = b; b = t;}
 
 void display(int arr[]) {
 	for (int i = 0; i < MAX_SIZE; i++) {
