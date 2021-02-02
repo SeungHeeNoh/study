@@ -1,9 +1,9 @@
 /*
-	12, 70, 30, 20, 55, 25를 병합 정렬을 이용하여 정렬하라.
+	12, 70, 30, 20, 55, 25, 40, 50를 병합 정렬을 이용하여 정렬하라.
 */
 #include<stdio.h>
 
-#define MAX_SIZE 6
+#define MAX_SIZE 8
 
 void display(int arr[]) {
 	for (int i = 0; i < MAX_SIZE; i++) {
@@ -50,7 +50,7 @@ void mergeSort(int arr[], int left, int right) {
 
 void main(){
 	printf("------test1------\n");
-	int test1[MAX_SIZE] = {12, 70, 30, 20, 55, 25};
+	int test1[MAX_SIZE] = {12, 70, 30, 20, 55, 25, 40, 50};
 
 	printf("Before mergeSort : ");
 	display(test1);
@@ -60,7 +60,7 @@ void main(){
 	printf("\n");
 
 	printf("------test2------\n");
-	int test2[MAX_SIZE] = {10, 20, 30, 40, 50, 60};
+	int test2[MAX_SIZE] = {10, 20, 30, 40, 50, 60, 70, 80};
 
 	printf("Before mergeSort : ");
 	display(test2);
@@ -70,7 +70,7 @@ void main(){
 	printf("\n");
 
 	printf("------test3------\n");
-	int test3[MAX_SIZE] = {60, 50, 40, 30, 20, 10};
+	int test3[MAX_SIZE] = {80, 70, 60, 50, 40, 30, 20, 10};
 
 	printf("Before mergeSort : ");
 	display(test3);
