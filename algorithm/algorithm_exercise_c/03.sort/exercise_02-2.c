@@ -1,9 +1,9 @@
 /*
-	12, 70, 30, 20, 55, 25를 힙 정렬을 이용하여 정렬하라.
+	12, 70, 30, 20, 55, 25, 40, 50를 힙 정렬을 이용하여 정렬하라.
 */
 #include<stdio.h>
 
-#define MAX_SIZE 6
+#define MAX_SIZE 8
 typedef struct HeapType{
 	int arr[MAX_SIZE+1];
 	int length;
@@ -52,10 +52,10 @@ void main(){
 	initHeap(&heap);
 
 	printf("------test1------\n");
-	int test1[MAX_SIZE] = {12, 70, 30, 20, 55, 25};
+	int test1[MAX_SIZE] = {12, 70, 30, 20, 55, 25, 40, 50};
 	
 
-	printf("Before mergeSort : ");
+	printf("Before heapSort : ");
 	display(test1, 0, MAX_SIZE);
 	for (int i = 0; i < MAX_SIZE; i++) {
 		insertHeap(&heap, test1[i]);
@@ -65,14 +65,14 @@ void main(){
 		test1[i] = deleteHeap(&heap);
 	}
 
-	printf("After mergeSort : ");
+	printf("After heapSort : ");
 	display(test1, 0, MAX_SIZE);
 	printf("\n");
 
 	printf("------test2------\n");
-	int test2[MAX_SIZE] = {10, 20, 30, 40, 50, 60};
+	int test2[MAX_SIZE] = {10, 20, 30, 40, 50, 60, 70, 80};
 
-	printf("Before mergeSort : ");
+	printf("Before heapSort : ");
 	display(test2, 0, MAX_SIZE);
 	for (int i = 0; i < MAX_SIZE; i++) {
 		insertHeap(&heap, test2[i]);
@@ -82,14 +82,14 @@ void main(){
 		test2[i] = deleteHeap(&heap);
 	}
 
-	printf("After mergeSort : ");
+	printf("After heapSort : ");
 	display(test2, 0, MAX_SIZE);
 	printf("\n");
 
 	printf("------test3------\n");
-	int test3[MAX_SIZE] = {60, 50, 40, 30, 20, 10};
+	int test3[MAX_SIZE] = {80, 70, 60, 50, 40, 30, 20, 10};
 
-	printf("Before mergeSort : ");
+	printf("Before heapSort : ");
 	display(test3, 0, MAX_SIZE);
 	for (int i = 0; i < MAX_SIZE; i++) {
 		insertHeap(&heap, test3[i]);
@@ -98,7 +98,7 @@ void main(){
 	for (int i = 0; i < MAX_SIZE; i++) {
 		test3[i] = deleteHeap(&heap);
 	}
-	printf("After mergeSort : ");
+	printf("After heapSort : ");
 	display(test3, 0, MAX_SIZE);
 	printf("\n");
 }
