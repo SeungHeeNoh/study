@@ -114,24 +114,6 @@ int main() {
 	display(test2_2);
 	printf("\n");
 
-	// printf("------test3------\n");
-	// int test3_1[MAX_SIZE], test3_2[MAX_SIZE];
-	// for (int i = 0; i < MAX_SIZE; i++) {
-	// 	test3_1[i] = (i+1) * 10;
-	// 	test3_2[i] = (i+1) * 10;
-	// }
-	// printf("Before quicksort : ");
-	// display(test3_1);
-
-	// printf("After quicksortV1 : ");
-	// quickSortV1(test3_1, 0, MAX_SIZE-1);
-	// display(test3_1);
-
-	// printf("After quicksortV2 : ");
-	// quickSortV2(test3_2, 0, MAX_SIZE-1);
-	// display(test3_2);
-	// printf("\n");
-
 	printf("------test3------\n");
 	int test3_1[MAX_SIZE], test3_2[MAX_SIZE];
 	for (int i = 0; i < MAX_SIZE; i++) {
@@ -148,6 +130,24 @@ int main() {
 	printf("After quicksortV2 : ");
 	quickSortV2(test3_2, 0, MAX_SIZE-1);
 	display(test3_2);
+	printf("\n");
+
+	printf("------test4------\n");
+	int test4_1[MAX_SIZE], test4_2[MAX_SIZE];
+	for (int i = 0; i < MAX_SIZE; i++) {
+		test4_1[i] = (i+1) * 10;
+		test4_2[i] = (i+1) * 10;
+	}
+	printf("Before quicksort : ");
+	display(test4_1);
+
+	printf("After quicksortV1 : ");
+	quickSortV1(test4_1, 0, MAX_SIZE-1);
+	display(test4_1);
+
+	printf("After quicksortV2 : ");
+	quickSortV2(test4_2, 0, MAX_SIZE-1);
+	display(test4_2);
 	printf("\n");
 
 	return 0;
