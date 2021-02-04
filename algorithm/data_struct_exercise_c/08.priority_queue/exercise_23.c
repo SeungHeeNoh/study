@@ -64,12 +64,38 @@ TreeNode *createNode(int newData, TreeNode *left, TreeNode *right) {
 	return newNode;
 }
 
+void print_huffman_tree(TreeNode *tn, int arr[], int idx) {
+	TreeNode *next = NULL;
+
+	idx++;
+	if (tn->left == NULL && tn->right == NULL) {
+		printf("%d : ", tn->data);
+		for (int i = 0; i < idx; i++) {
+			printf("%d", arr[i]);
+		}
+		printf("\n");
+	}
+
+	if (tn->left != NULL) {
+		next = tn->left;
+		arr[idx] = 0;
+		print_huffman_tree(next, arr, idx);
+	}
+
+	if (tn->right != NULL) {
+		next = tn->right;
+		arr[idx] = 1;
+		print_huffman_tree(next, arr, idx);
+	}
+}
+
 void huffman_tree(int *arr, int length) {
 	HeapType heap;
 	heapInit(&heap);
 	TreeNode *huffman = NULL, *leftNode = NULL, *rightNode = NULL, *node = NULL;
 
 	int min1, min2, p;
+	int print_arr[MAX_SIZE];
 
 	for (int i=0; i<length; i++) {
 		insertMinHeap(&heap, createNode(arr[i], NULL, NULL));
@@ -81,6 +107,8 @@ void huffman_tree(int *arr, int length) {
 		huffman = createNode(leftNode->data + rightNode->data, leftNode, rightNode);
 		insertMinHeap(&heap, huffman);
 	}
+
+	print_huffman_tree(huffman, print_arr, -1);
 }
 
 
