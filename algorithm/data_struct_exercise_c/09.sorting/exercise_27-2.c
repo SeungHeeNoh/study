@@ -51,13 +51,17 @@ int partiton(int arr[], int left, int right) {
 	int pivot = arr[left], low = left, high = right+1;
 
 	do {
-		while(arr[++low] < pivot && low <= right){}
-		while(arr[--high] > pivot && high >= left){}
-		if (high <= low) break;
+		while(arr[++low] <= pivot && low <= right){}
+		while(arr[--high] >= pivot && high >= left){}
+		if (high <= low || low > right || high < left) break;
 		SWAP(arr[low], arr[high]);
 	} while(1);
 
-	SWAP(arr[left], arr[high]);
+	if (high < left) {
+		high = left;
+	} else {
+		SWAP(arr[left], arr[high]);
+	}
 
 	return high;
 }
