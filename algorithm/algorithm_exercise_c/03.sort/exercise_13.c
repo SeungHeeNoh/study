@@ -17,12 +17,6 @@ void changeBase(int arr[], int k) {
 	}
 }
 
-void getOriginal(int arr[], int k) {
-	for (int i = 0; i < MAX_SIZE; i++) {
-		arr[i] -= k;
-	}
-}
-
 void countingSort(int problem[], int result[], int k) {
 	int temp[MAX_SIZE*2] = {0, };
 
