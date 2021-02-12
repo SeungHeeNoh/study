@@ -1,5 +1,6 @@
 /*
 	레드 블랙 트리를 구현하라.
+	C program for Red-Black Tree
 */
 #include<stdio.h>
 #include<malloc.h>
@@ -186,6 +187,24 @@ int main() {
 	insertTree(&rbtree2, 8);
 	insertTree(&rbtree2, 15);
 	insertTree(&rbtree2, 7);
+	printf("\n");
+
+	printf("-------------test3-------------\n");
+	Node *rbtree3 = NILL;
+
+	insertTree(&rbtree3, 20);
+	insertTree(&rbtree3, 10);
+	insertTree(&rbtree3, 30);
+	insertTree(&rbtree3, 25);
+	insertTree(&rbtree3, 40);
+	printf("\n");
+
+	printf("-------------test4-------------\n");
+	Node *rbtree4 = NILL;
+
+	insertTree(&rbtree4, 4);
+	insertTree(&rbtree4, 8);
+	insertTree(&rbtree4, 12);
 	printf("\n");
 
 	return 0;
