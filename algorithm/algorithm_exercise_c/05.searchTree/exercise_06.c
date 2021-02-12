@@ -42,18 +42,27 @@ Node* createNode(int data) {
 	return newNode;
 }
 
-void searchTree(Node **root, int findData) {
-	Node *n = *root;
+Node* findNode(Node **root, int findData) {
+	Node *n = *root, *resultNode = NULL;
 
 	while (n != NILL) {
 		if (n->data == findData) {
-			printf("%d is exist.\n");
-			return;
+			resultNode = n;
+			break;
 		} else {
 			n = n->data > findData ? n->left : n->right;
 		}
 	}
-	printf("%d is not exist.\n", findData);
+
+	return resultNode;
+}
+
+void searchTree(Node **root, int findData) {
+	if (findNode(root, findData) == NULL) {
+		printf("%d is not exist.\n", findData);
+	} else {
+		printf("%d is exist.\n", findData);
+	}
 }
 
 void rotateLL(Node **root, Node *p) {
@@ -173,6 +182,56 @@ void insertTree(Node **root, int newData) {
 	printf("\n");
 }
 
+void deleteTree(Node **root, int deleteData) {
+	Node* deleteNode = findNode(root, deleteData);
+
+	if (deleteNode == NULL) {
+		printf("%d is not exist.\n", deleteData);
+	} else {
+		Node *p = deleteNode->parent;
+
+		if (deleteNode->left == NILL && deleteNode->right == NILL) {
+			if (p == NILL) {
+				*root = NILL;
+			} else {
+				if (p->left == deleteNode){
+					p->left = NILL;
+				} else {
+					p->right = NILL;
+				}
+			}
+		} else if (deleteNode->left == NILL || deleteNode->right == NILL) {
+			Node *child = deleteNode->left == NILL ? deleteNode->right : deleteNode->left;
+
+			if (p == NILL) {
+				*root = child;
+			} else {
+				if (p->left == deleteNode){
+					p->left = child;
+				} else {
+					p->right = child;
+				}
+			}
+		} else {
+			Node *sub_t = deleteNode->right, *sub_p = deleteNode;
+
+			while(sub_t->left != NILL) {
+				sub_p = sub_t;
+				sub_t = sub_t->left;
+			}
+
+			if (sub_p->left == sub_t) {
+				sub_p->left = sub_t->right;
+			} else {
+				sub_p->right = sub_t->right;
+			}
+
+			deleteNode->data = sub_t->data;
+			deleteNode = sub_t;
+		}
+		free(deleteNode);
+	}
+}
 int main() {
 	initNILL();
 	printf("-------------test1-------------\n");
@@ -187,6 +246,8 @@ int main() {
 	insertTree(&rbtree1, 13);
 	insertTree(&rbtree1, 15);
 	searchTree(&rbtree1, 6);
+	deleteTree(&rbtree1, 6);
+	display(rbtree1);
 	printf("\n");
 
 	printf("-------------test2-------------\n");
