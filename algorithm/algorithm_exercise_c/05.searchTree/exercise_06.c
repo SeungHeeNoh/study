@@ -42,6 +42,20 @@ Node* createNode(int data) {
 	return newNode;
 }
 
+void searchTree(Node **root, int findData) {
+	Node *n = *root;
+
+	while (n != NILL) {
+		if (n->data == findData) {
+			printf("%d is exist.\n");
+			return;
+		} else {
+			n = n->data > findData ? n->left : n->right;
+		}
+	}
+	printf("%d is not exist.\n", findData);
+}
+
 void rotateLL(Node **root, Node *p) {
 	Node *child = p->left;
 
@@ -173,6 +187,7 @@ int main() {
 	insertTree(&rbtree1, 8);
 	insertTree(&rbtree1, 13);
 	insertTree(&rbtree1, 15);
+	searchTree(&rbtree1, 6);
 	printf("\n");
 
 	printf("-------------test2-------------\n");
@@ -187,6 +202,7 @@ int main() {
 	insertTree(&rbtree2, 8);
 	insertTree(&rbtree2, 15);
 	insertTree(&rbtree2, 7);
+	searchTree(&rbtree2, 11);
 	printf("\n");
 
 	printf("-------------test3-------------\n");
