@@ -7,15 +7,24 @@
 typedef struct Node {
 	int data;
 	int isRed;
-	struct Node *left, *right;
+	struct Node *left, *right, *parent;
 }Node;
 
+Node *NILL;
+
 void display(Node *node) {
-	if (node != NULL) {
+	if (node != NILL) {
 		display(node->left);
 		printf("(%d, %d)", node->data, node->isRed);
 		display(node->right);
 	}
+}
+
+void initNILL() {
+	NILL = malloc(sizeof(Node));
+	NILL->data = -999;
+	NILL->left = NILL->right = NULL;
+	NILL->isRed = 0;
 }
 
 Node* createNode(int data) {
@@ -25,17 +34,102 @@ Node* createNode(int data) {
 		printf("Allocation is Failed.\n");
 	} else {
 		newNode->data = data;
-		newNode->left = newNode->right = NULL;
+		newNode->left = newNode->right = newNode->parent = NILL;
 		newNode->isRed = 1;
 	}
 
 	return newNode;
 }
 
+void rotateLL(Node **root, Node *p) {
+	Node *child = p->left;
+
+	p->left = child->right;
+	child->right = p;
+	child->parent = p->parent;
+
+	if (p == *root) {
+		*root = child;
+	} else {
+		if (child->parent->left == p) {
+			child->parent->left = child;
+		} else {
+			child->parent->right = child;
+		}
+	}
+
+	p->parent = child;
+}
+
+void rotateRR(Node **root, Node *p) {
+	Node *child = p->right;
+
+	p->right = child->left;
+	child->left = p;
+	child->parent = p->parent;
+
+	if (p == *root) {
+		*root = child;
+	} else {
+		if (child->parent->left == p) {
+			child->parent->left = child;
+		} else {
+			child->parent->right = child;
+		}
+	}
+
+	p->parent = child;
+}
+
+void fixup(Node **root, Node *c) {
+	while (c != *root) {
+		Node *p = c->parent,
+		 	 *g = p->parent,
+		 	 *u = g->left == p ? g->right : g->left;
+
+		if (p->isRed == 1 && c->isRed == 1) {
+			if (u == NILL || u->isRed == 0) {
+				if (g->left == p) {
+					if (p->right == c) {
+						// case 2-1
+						rotateRR(root, p);
+						c = p;
+					} else {
+						// case 2-2
+						rotateLL(root, g);
+						int tempcolor = g->isRed;
+						g->isRed = p->isRed;
+						p->isRed = tempcolor;
+						c = p;
+					}
+				} else {
+					if (p->left == c) {
+						rotateLL(root, p);
+						c = p;
+					} else {
+						rotateRR(root, g);
+						int tempcolor = g->isRed;
+						g->isRed = p->isRed;
+						p->isRed = tempcolor;
+						c = p;
+					}
+				}
+			} else if (u->isRed == 1) {
+				// case 1 : Recoloring
+				p->isRed = u->isRed = 0;
+				if (g != *root) g->isRed = 1;
+				c = g;
+			}
+		} else {
+			break;
+		}
+	}
+}
+
 void insertTree(Node **root, int newData) {
 	Node *n = *root, *p = NULL, *newNode = NULL;
 
-	while(n != NULL) {
+	while(n != NILL) {
 		if (n->data == newData) {
 			printf("%d is already exist.\n", newData);
 			return;
@@ -57,22 +151,42 @@ void insertTree(Node **root, int newData) {
 		} else {
 			p->left = newNode;
 		}
+		newNode->parent = p;
 	}
 
+	fixup(root, newNode);
 	display(*root);
 	printf("\n");
 }
 
 int main() {
-	Node *rbtree = NULL;
-	insertTree(&rbtree, 10);
-	insertTree(&rbtree, 5);
-	insertTree(&rbtree, 6);
-	insertTree(&rbtree, 3);
-	insertTree(&rbtree, 2);
-	insertTree(&rbtree, 8);
-	insertTree(&rbtree, 13);
-	insertTree(&rbtree, 15);
+	initNILL();
+	printf("-------------test1-------------\n");
+	Node *rbtree1 = NILL;
+
+	insertTree(&rbtree1, 10);
+	insertTree(&rbtree1, 5);
+	insertTree(&rbtree1, 6);
+	insertTree(&rbtree1, 3);
+	insertTree(&rbtree1, 2);
+	insertTree(&rbtree1, 8);
+	insertTree(&rbtree1, 13);
+	insertTree(&rbtree1, 15);
+	printf("\n");
+
+	printf("-------------test2-------------\n");
+	Node *rbtree2 = NILL;
+
+	insertTree(&rbtree2, 10);
+	insertTree(&rbtree2, 5);
+	insertTree(&rbtree2, 13);
+	insertTree(&rbtree2, 6);
+	insertTree(&rbtree2, 3);
+	insertTree(&rbtree2, 2);
+	insertTree(&rbtree2, 8);
+	insertTree(&rbtree2, 15);
+	insertTree(&rbtree2, 7);
+	printf("\n");
 
 	return 0;
 }
