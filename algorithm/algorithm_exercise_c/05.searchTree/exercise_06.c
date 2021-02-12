@@ -104,13 +104,12 @@ void fixup(Node **root, Node *c) {
 
 		if (p->isRed == 1 && c->isRed == 1) {
 			if (u == NILL || u->isRed == 0) {
+				// case 2 : Restructuring
 				if (g->left == p) {
 					if (p->right == c) {
-						// case 2-1
 						rotateRR(root, p);
 						c = p;
 					} else {
-						// case 2-2
 						rotateLL(root, g);
 						int tempcolor = g->isRed;
 						g->isRed = p->isRed;
