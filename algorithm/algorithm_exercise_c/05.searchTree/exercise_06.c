@@ -105,7 +105,7 @@ void rotateRR(Node **root, Node *p) {
 	p->parent = child;
 }
 
-void fixup(Node **root, Node *c) {
+void insertFixup(Node **root, Node *c) {
 	while (c != *root) {
 		Node *p = c->parent,
 		 	 *g = p->parent,
@@ -177,7 +177,7 @@ void insertTree(Node **root, int newData) {
 		newNode->parent = p;
 	}
 
-	fixup(root, newNode);
+	insertFixup(root, newNode);
 	display(*root);
 	printf("\n");
 }
