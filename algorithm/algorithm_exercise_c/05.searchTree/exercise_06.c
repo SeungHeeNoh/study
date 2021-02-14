@@ -182,13 +182,69 @@ void insertTree(Node **root, int newData) {
 	printf("\n");
 }
 
+void deleteFixup(Node **root, Node *x) {
+	Node *p = x->parent,
+		 *s = p->left == x ? p->right : p->left;
+
+	if (s->isRed) {
+		p->isRed = 1;
+		s->isRed = 0;
+
+		if (p->left == x) {
+			rotateLL(root, p);
+		} else {
+			rotateRR(root, p);
+		}
+
+		deleteFixup(root, x);
+	} else {
+		if (!s->left->isRed && !s->left->isRed) {
+			s->isRed = 1;
+
+			if (p->isRed) {
+				p->isRed = 0;
+			} else {
+				deleteFixup(root, p);
+			}
+		} else {
+			if (x == p->left) {
+				if (!s->right->isRed) {
+					rotateRR(root, s);
+					s->isRed = 1;
+					s->left->isRed = 0;
+					s = p->right;
+				}
+
+				int temp = p->isRed;
+				p->isRed = s->isRed;
+				s->isRed = temp;
+				s->right->isRed = 0;
+				rotateLL(root, p);
+			} else {
+				if (!s->left->isRed) {
+					rotateLL(root, s);
+					s->isRed = 1;
+					s->left->isRed = 0;
+					s = p->right;
+				}
+
+				int temp = p->isRed;
+				p->isRed = s->isRed;
+				s->isRed = temp;
+				s->left->isRed = 0;
+				rotateRR(root, p);
+			}
+		}
+	}
+}
+
 void deleteTree(Node **root, int deleteData) {
 	Node* deleteNode = findNode(root, deleteData);
 
 	if (deleteNode == NULL) {
-		printf("%d is not exist.\n", deleteData);
+		printf("delete : %d is not exist.\n", deleteData);
 	} else {
-		Node *p = deleteNode->parent;
+		Node *p = deleteNode->parent, *c = NULL;
 
 		if (deleteNode->left == NILL && deleteNode->right == NILL) {
 			if (p == NILL) {
@@ -211,6 +267,7 @@ void deleteTree(Node **root, int deleteData) {
 				} else {
 					p->right = child;
 				}
+				c = child;
 			}
 		} else {
 			Node *sub_t = deleteNode->right, *sub_p = deleteNode;
@@ -227,11 +284,19 @@ void deleteTree(Node **root, int deleteData) {
 			}
 
 			deleteNode->data = sub_t->data;
+			deleteNode->isRed = sub_t->isRed;
+			c = deleteNode;
 			deleteNode = sub_t;
 		}
+
+		if (c != *root && deleteNode->isRed == 0) {
+			deleteFixup(root, c);
+		}
+
 		free(deleteNode);
 	}
 }
+
 int main() {
 	initNILL();
 	printf("-------------test1-------------\n");
@@ -263,6 +328,8 @@ int main() {
 	insertTree(&rbtree2, 15);
 	insertTree(&rbtree2, 7);
 	searchTree(&rbtree2, 11);
+	deleteTree(&rbtree2, 5);
+	display(rbtree2);
 	printf("\n");
 
 	printf("-------------test3-------------\n");
