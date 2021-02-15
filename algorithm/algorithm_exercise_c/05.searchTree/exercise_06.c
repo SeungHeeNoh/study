@@ -4,7 +4,7 @@
 */
 #include<stdio.h>
 #include<malloc.h>
-
+#define SWAP(a, b) {int t = a; a = b; b = t;}
 typedef struct Node {
 	int data;
 	int isRed;
@@ -120,9 +120,7 @@ void insertFixup(Node **root, Node *c) {
 						c = p;
 					} else {
 						rotateLL(root, g);
-						int tempcolor = g->isRed;
-						g->isRed = p->isRed;
-						p->isRed = tempcolor;
+						SWAP(g->isRed, p->isRed);
 						c = p;
 					}
 				} else {
@@ -131,9 +129,7 @@ void insertFixup(Node **root, Node *c) {
 						c = p;
 					} else {
 						rotateRR(root, g);
-						int tempcolor = g->isRed;
-						g->isRed = p->isRed;
-						p->isRed = tempcolor;
+						SWAP(g->isRed, p->isRed);
 						c = p;
 					}
 				}
@@ -215,9 +211,7 @@ void deleteFixup(Node **root, Node *x) {
 					s = p->right;
 				}
 
-				int temp = p->isRed;
-				p->isRed = s->isRed;
-				s->isRed = temp;
+				SWAP(p->isRed, s->isRed);
 				s->right->isRed = 0;
 				rotateLL(root, p);
 			} else {
@@ -228,9 +222,7 @@ void deleteFixup(Node **root, Node *x) {
 					s = p->right;
 				}
 
-				int temp = p->isRed;
-				p->isRed = s->isRed;
-				s->isRed = temp;
+				SWAP(p->isRed, s->isRed);
 				s->left->isRed = 0;
 				rotateRR(root, p);
 			}
