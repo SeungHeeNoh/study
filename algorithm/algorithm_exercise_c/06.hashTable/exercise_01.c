@@ -22,6 +22,15 @@ void display(element array[]) {
 	printf("\n");
 }
 
+int isFull(element array[]) {
+	for (int i = 0; i < ARRAY_MAX; i++) {
+		if (!array[i].use) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 void initHashTable(element array[]) {
 	for (int i=0; i<ARRAY_MAX; i++) {
 		array[i].data = -1;
@@ -36,8 +45,13 @@ int getIndex(int data) {
 void insertData(element r[], int data) {
 	int index = getIndex(data);
 
+	if (isFull(r)) {
+		printf("Hash Table is Full.\n");
+		return;
+	}
+
 	while(r[index].use){
-		index++;
+		index = ++index % ARRAY_MAX;
 	}
 
 	r[index].data = data;
@@ -46,14 +60,15 @@ void insertData(element r[], int data) {
 }
 
 int findData(element r[], int data) {
-	int index = getIndex(data);
+	int index = getIndex(data), count = 0;
 
 	do {
 		if (r[index].data == data) {
 			return index;
 		}
 		index = ++index % ARRAY_MAX;
-	} while(r[index].use || r[index].deleted);
+		count++;
+	} while((r[index].use || r[index].deleted) && count <= ARRAY_MAX);
 
 	return -1;
 }
@@ -95,4 +110,16 @@ void main() {
 	deleteData(result1, 46);
 	display(result1);
 	searchData(result1, 73);
+
+	// hash table full case
+	int test2[15] = {10, 20, 30, 40, 33, 46, 50, 60, 11, 22, 33, 44, 55, 66, 77};
+	element result2[ARRAY_MAX];
+	initHashTable(result2);
+
+	for (int i=0; i<15; i++) {
+		insertData(result2, test2[i]);
+	}
+	display(result2);
+	searchData(result2, 66);
+	searchData(result2, 77);
 }
