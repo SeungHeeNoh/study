@@ -45,22 +45,61 @@ void insertData(element r[], int data) {
 	int index = 0;
 
 	if (isFull(r)) {
-		printf("Hash Table is Full\n");
+		printf("Hash Table is Full.\n");
 		return;
 	}
 
-	for (int i=0; ; i++) {
+	for (int i=0; i<ARRAY_MAX; i++) {
 		index = (data + (int)pow(i, 2)) % ARRAY_MAX;
 
 		if (!r[index].use) {
 			r[index].data = data;
 			r[index].use = 1;
+			return;
+		}
+	}
+
+	printf("%d can not find index. so can not insert in hash table.\n", data);
+}
+
+int findData(element r[], int data) {
+	int index;
+
+	for (int i=0; i<ARRAY_MAX; i++) {
+		index = (data + (int)pow(i, 2)) % ARRAY_MAX;
+
+		if (r[index].use || r[index].deleted) {
+			if (r[index].data == data) {
+				return index;
+			}
+		} else {
 			break;
 		}
 	}
+	return -1;
 }
 
+void searchData(element r[], int data) {
+	int index = findData(r, data);
 
+	if (index < 0) {
+		printf("%d is not exist.\n", data);
+	} else {
+		printf("%d is exist.\n", data);
+	}
+}
+
+void deleteData(element r[], int data) {
+	int index = findData(r, data);
+
+	if (index < 0) {
+		printf("%d is not exist.\n", data);
+	} else {
+		r[index].data = -1;
+		r[index].use = 0;
+		r[index].deleted = 1;
+	}
+}
 
 void main() {
 	int test1[INPUT_MAX] = {10, 20, 30, 40, 33, 46, 50, 60};
@@ -73,8 +112,8 @@ void main() {
 
 	display(result1);
 
-	// searchData(result1, 60);
-	// deleteData(result1, 46);
-	// display(result1);
-	// searchData(result1, 73);
+	searchData(result1, 60);
+	deleteData(result1, 46);
+	display(result1);
+	searchData(result1, 73);
 }
