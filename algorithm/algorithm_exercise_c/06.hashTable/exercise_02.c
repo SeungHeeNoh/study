@@ -26,8 +26,11 @@ void display(element array[]) {
 
 int isFull(element array[]) {
 	for (int i=0; i<ARRAY_MAX; i++) {
-		return 0;
+		if (array[i].use == 0) {
+			return 0;
+		}
 	}
+	return 1;
 }
 
 void initHashTable(element array[]) {
@@ -101,7 +104,8 @@ void deleteData(element r[], int data) {
 	}
 }
 
-void main() {
+int main() {
+	printf("------test1------\n");
 	int test1[INPUT_MAX] = {10, 20, 30, 40, 33, 46, 50, 60};
 	element result1[ARRAY_MAX];
 	initHashTable(result1);
@@ -116,4 +120,20 @@ void main() {
 	deleteData(result1, 46);
 	display(result1);
 	searchData(result1, 73);
+	printf("\n");
+
+	printf("------test2------\n");
+	// hash table full case
+	int test2[15] = {10, 20, 30, 40, 33, 46, 50, 60, 11, 22, 33, 44, 55, 66, 77};
+	element result2[ARRAY_MAX];
+	initHashTable(result2);
+
+	for (int i=0; i<15; i++) {
+		insertData(result2, test2[i]);
+	}
+	display(result2);
+	searchData(result2, 66);
+	searchData(result2, 77);
+
+	return 0;
 }
