@@ -40,10 +40,6 @@ void initHashTable(element array[]) {
 	}
 }
 
-int getIndex(int data, int i) {
-	return (data + (int)pow(i, 2)) % ARRAY_MAX;
-}
-
 void insertData(element r[], int data) {
 	int index = 0;
 
