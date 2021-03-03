@@ -7,7 +7,7 @@
 
 typedef struct Element{
 	int data;
-	struct Element *left, *right;
+	struct Element *right;
 }Element;
 
 typedef struct List{
@@ -39,7 +39,7 @@ Element* createElement(int data) {
 		printf("Allocation Error.\n");
 	} else {
 		newNode->data = data;
-		newNode->left = newNode->right = NULL;
+		newNode->right = NULL;
 	}
 
 	return newNode;
@@ -50,9 +50,7 @@ void make_set(List *list, Element *newNode) {
 
 	if (list->front == NULL) {
 		list->front = list->rear = newNode;
-		newNode->left = newNode;
 	} else {
-		newNode->left = list->rear;
 		newNode->right = NULL;
 		list->rear->right = newNode;
 		list->rear = newNode;
@@ -88,7 +86,6 @@ void union_set(List *list1, List *list2) {
 		init(list2);
 	}
 
-	oldFront->left = oldRear;
 	oldRear->right = oldFront;
 
 	while(n->right != NULL) {
