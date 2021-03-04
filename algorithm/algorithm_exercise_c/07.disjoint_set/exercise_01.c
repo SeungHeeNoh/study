@@ -5,115 +5,103 @@
 #include<stdio.h>
 #include<malloc.h>
 
+#define DISJOINT_SIZE 25
 typedef struct Element{
 	int data;
-	struct Element *right;
+	struct Element *link;
 }Element;
 
-typedef struct List{
-	Element *front, *rear;
-	int length;
-}List;
+Element *parent[DISJOINT_SIZE];
 
-Element *parent[25];
-
-void init(List *list) {
-	list->front = list->rear = NULL;
-	list->length = 0;
+void init() {
+	for(int i=0; i<DISJOINT_SIZE; i++) {
+		parent[i] = NULL;
+	}
 }
 
-void display(List list) {
-	Element *n = list.front;
-	
-	while(n != NULL) {
-		printf("%d ", n->data);
-		n = n->right;
+void display() {
+	for(int i=0; i<DISJOINT_SIZE; i++) {
+		if (parent[i] != NULL) printf("%d ", parent[i]->data);
 	}
 	printf("\n");
 }
 
-Element* createElement(int data) {
+void make_set(int data) {
 	Element *newNode = (Element *)malloc(sizeof(Element));
 
 	if (newNode == NULL) {
 		printf("Allocation Error.\n");
+		return;
 	} else {
 		newNode->data = data;
-		newNode->right = NULL;
+		newNode->link = NULL;
 	}
 
-	return newNode;
-}
-
-void make_set(List *list, Element *newNode) {
-	if (newNode == NULL) return;
-
-	if (list->front == NULL) {
-		list->front = list->rear = newNode;
-	} else {
-		newNode->right = NULL;
-		list->rear->right = newNode;
-		list->rear = newNode;
-	}
-	list->length++;
-	parent[newNode->data] = list->front;
+	parent[newNode->data] = newNode;
 }
 
 Element *find_set(int data) {
+	while(parent[data]->data != data) {
+		data = parent[data]->data;
+	}
 	return parent[data];
 }
 
-void union_set(List *list1, List *list2) {
-	Element *oldFront = NULL, *newFront = NULL, *oldRear = NULL, *n= NULL;
-	
-	if (list2->length > list1->length) {
-		oldFront  = list1->front;
-		newFront = list2->front;
-		oldRear = list2->rear;
+int getLength(Element *p) {
+	int length = 0;
 
-		list2->length += list1->length;
-		list2->rear = list1->rear;
-		n = list1->front;
-		init(list1);
-	} else {
-		oldFront = list2->front;
-		newFront = list1->front;
-		oldRear = list1->rear;
-
-		list1->length += list2->length;
-		list1->rear = list2->rear;
-		n = list2->front;
-		init(list2);
+	while(p != NULL) {
+		p = p->link;
+		length++;
 	}
 
-	oldRear->right = oldFront;
+	return length;
+}
 
-	while(n->right != NULL) {
-		parent[n->data] = newFront;
-		n = n->right;
+void union_set(int x, int y) {
+	Element *parent_x = find_set(x), *parent_y = find_set(y);
+	Element *tail, *n, *new_p;
+	int length_x = getLength(parent_x), length_y = getLength(parent_y);
+
+	if (length_x < length_y) {
+		tail = new_p = parent_y;
+		n = parent_x;
+	} else {
+		tail = new_p = parent_x;
+		n = parent_y;
+	}
+
+	while (tail->link != NULL) tail = tail->link;
+	while (n != NULL) {
+		parent[n->data] = new_p;
+		tail->link = n;
+		tail = n;
+		n = n->link;
 	}
 }
 
 int main() {
-	List set1;
-	init(&set1);
+	init();
 
-	make_set(&set1, createElement(1));
-	make_set(&set1, createElement(3));
-	display(set1);
+	// {1, 3}
+	make_set(1);
+	make_set(3);
+	union_set(1, 3);
+	display();
 
-	List set2;
-	init(&set2);
+	// {12, 20, 7, 9}
+	make_set(12);
+	make_set(20);
+	make_set(7);
+	make_set(9);
+	union_set(12, 20);
+	union_set(12, 7);
+	union_set(7, 9);
+	display();
 
-	make_set(&set2, createElement(12));
-	make_set(&set2, createElement(20));
-	make_set(&set2, createElement(7));
-	make_set(&set2, createElement(9));
-	display(set2);
-
-	union_set(&set1, &set2);
-	display(set1);
-	display(set2);
+	// {12, 20, 7, 9, 1, 3}
+	union_set(1, 7);
+	display();
 
 	return 0;
 }
