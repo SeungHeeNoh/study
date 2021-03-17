@@ -1,6 +1,8 @@
 /*
 	단조증가 부분수열의 길이를 동적 프로그래믕올 차는 알고리즘을 고안하라.
 	<1, 10, 5, 20, 15, 10, 30, 49, 25, 35, 66, 75, 44>
+
+	구현 참고 페이지 : SUNGHWAN PARK, "LIS의 길이를 구하는 3가지 알고리즘", <https://shoark7.github.io/programming/algorithm/3-LIS-algorithms>.
 */
 
 #include<stdio.h>
