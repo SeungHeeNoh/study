@@ -1,0 +1,14 @@
+### Book
+쉽게 배우는 알고리즘(관계 중심의 사고법)
+
+---
+
+### Algorithm Implement List
+| Algorithm name | Implement |
+|-----------------|----------------|
+|Sort|- [Insertion Sort](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/03.sort/exercise_01-3.c)</br> - [Selection Sort](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/03.sort/exercise_01-1.c)</br> - [Bubble Sort](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/03.sort/exercise_01-2.c)</br> - [Merge Sort](hhttps://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/03.sort/exercise_02-1.c)</br>- [Quick Sort](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/03.sort/exercise_03.c)</br> - [Radix Sort](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/03.sort/exercise_13.c)</br>|
+|Search Tree|- [Binary Search Tree](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/05.searchTree/exercise_03_04_05.c)</br> - [Red-Black Tree](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/05.searchTree/exercise_06.c)</br>|
+|Hash Table|- [Linear Probing](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/06.hashTable/exercise_01.c)</br> - [Quadratic Probing](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/06.hashTable/exercise_02.c)</br> - [Double Hasing](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/06.hashTable/exercise_03.c)|
+|Disjoint Set|- [Disjoint Set using linked list](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/07.disjoint_set/exercise_01.c)</br> - [Disjoint Set using rank](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/07.disjoint_set/exercise_03.c)|
+| Dynamic Programming |- [Matrix Chain Multiplication](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/08.DynamicProgramming/exercise_01.c)</br> - [Longest Common Substring](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/08.DynamicProgramming/exercise_03.c)</br> - [Minimum Cost Path](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/08.DynamicProgramming/exercise_06.c)</br> - [Longest Increasing Subsequence](https://github.com/SeungHeeNoh/study/blob/master/algorithm/algorithm_exercise_c/08.DynamicProgramming/exercise_07.c)</br>|
+|
