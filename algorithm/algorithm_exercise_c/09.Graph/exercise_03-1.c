@@ -36,7 +36,7 @@ int isQueueEmpty(QueueType qt) {
 }
 
 int isQueueFull(QueueType qt) {
-	return (qt.front+1)/ARRAY_SIZE == qt.rear;
+	return (qt.rear+1)/ARRAY_SIZE == qt.front;
 }
 
 void enqueue(QueueType *qt, int data) {
