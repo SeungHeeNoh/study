@@ -36,15 +36,27 @@ int isQueueEmpty(QueueType qt) {
 }
 
 int isQueueFull(QueueType qt) {
-	return (qt.rear+1)/ARRAY_SIZE == qt.front;
+	return (qt.rear+1)%ARRAY_SIZE == qt.front;
 }
 
 void enqueue(QueueType *qt, int data) {
-	qt->queue[++qt->rear] = data;
+	if (isQueueFull(*qt)) {
+		printf("Queue is Full.\n");
+	} else {
+		qt->queue[(++qt->rear)%ARRAY_SIZE] = data;
+	}
 }
 
 int dequeue(QueueType *qt) {
-	return qt->queue[++qt->front];
+	int data = -1;
+
+	if (isQueueEmpty(*qt)) {
+		printf("Queue is Empty.\n");
+	} else {
+		data = qt->queue[(++qt->front)%ARRAY_SIZE];
+	}
+
+	return data;
 }
 
 void initBFS(QueueType *qt, int arr[]) {
@@ -68,9 +80,14 @@ void getBFS() {
 
 	while(!isQueueEmpty(qt)) {
 		v = dequeue(&qt);
-		printf("%c ", (char)(v+65));
+		if (v == -1 ) {
+			printf("Cannot find BFS.\n");
+			return;
+		} else {
+			printf("%c ", (char)(v+65));
+		}
 
-		for(int i=0; i<ARRAY_SIZE; i++) {
+		for (int i=0; i<ARRAY_SIZE; i++) {
 			if (!selected[i] && array[v][i]) {
 				selected[i] = 1;
 				enqueue(&qt, i);
