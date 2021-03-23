@@ -34,7 +34,7 @@ int main() {
 	TreeNode n10 = {9, &n9, &n8};
 	TreeNode n11 = {11, &n5, &n10};
 
-	printf("%d", getTwoChildNode(&n11));
+	printf("parent node with two child nodes : %d", getTwoChildNode(&n11));
 
 	return 0;
 }
