@@ -54,15 +54,17 @@ int dequeue(QueueType *qt) {
 	return qt->queue[qt->front];
 }
 
-void init(int distance[], int parent[], QueueType *qt) {
+void init(int distance[], int parent[], int onQueue[], QueueType *qt) {
 	for(int i=0; i<ARRAY_SIZE; i++) {
 		distance[i] = INF;
 		parent[i] = i;
+		onQueue[i] = 0;
 	}
 
 	distance[0] = 0;
 	initQueue(qt);
 	enqueue(qt, 0);
+	onQueue[0] = 1;
 }
 
 void displayDistance(int array[]) {
@@ -80,19 +82,24 @@ void displayParent(int parent[]) {
 void getShortestPath() {
 	QueueType qt;
 	int distance[ARRAY_SIZE],
-		parent[ARRAY_SIZE];
+		parent[ARRAY_SIZE],
+		onQueue[ARRAY_SIZE];
 	int v;
 
-	init(distance, parent, &qt);
+	init(distance, parent, onQueue, &qt);
 
 	while(!isEmptyQueue(qt)) {
 		v = dequeue(&qt);
+		onQueue[v] = 0;
 
 		for(int i=0; i<ARRAY_SIZE; i++) {
 			if(weight[v][i] + distance[v] < distance[i]) {
 				distance[i] = weight[v][i] + distance[v];
-				enqueue(&qt, i);
-				parent[i] = v;
+				if (!onQueue[i]) {
+					onQueue[i] = 1;
+					enqueue(&qt, i);
+					parent[i] = v;
+				}
 			}
 		}
 	}
