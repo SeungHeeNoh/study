@@ -43,7 +43,8 @@ void enqueue(QueueType *qt, int data) {
 	if (isQueueFull(*qt)) {
 		printf("Queue is Full.\n");
 	} else {
-		qt->queue[(++qt->rear)%ARRAY_SIZE] = data;
+		qt->rear = (++qt->rear)%ARRAY_SIZE; 
+		qt->queue[qt->rear] = data;
 	}
 }
 
@@ -53,7 +54,8 @@ int dequeue(QueueType *qt) {
 	if (isQueueEmpty(*qt)) {
 		printf("Queue is Empty.\n");
 	} else {
-		data = qt->queue[(++qt->front)%ARRAY_SIZE];
+		qt->front = (++qt->front)%ARRAY_SIZE;
+		data = qt->queue[qt->front];
 	}
 
 	return data;
