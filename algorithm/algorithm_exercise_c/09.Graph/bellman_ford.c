@@ -19,7 +19,7 @@ int weight[ARRAY_SIZE][ARRAY_SIZE] = {
 	{INF, -15, 3, 0, 1, INF, INF, INF},
 	{INF, INF, INF, INF, 0, INF, INF, 2},
 	{INF, INF, INF, INF, INF, 0, -7, INF},
-	{INF, INF, INF, 12, INF, INF, 0, 5},
+	{INF, INF, INF, -12, INF, INF, 0, 5},
 	{INF, INF, INF, INF, INF, 4, INF, 0}
 };
 
@@ -54,11 +54,12 @@ int dequeue(QueueType *qt) {
 	return qt->queue[qt->front];
 }
 
-void init(int distance[], int parent[], int onQueue[], QueueType *qt) {
+void init(int distance[], int parent[], int cnt[], int onQueue[], QueueType *qt) {
 	for(int i=0; i<ARRAY_SIZE; i++) {
 		distance[i] = INF;
 		parent[i] = i;
 		onQueue[i] = 0;
+		cnt[i] = 0;
 	}
 
 	distance[0] = 0;
@@ -83,18 +84,26 @@ void getShortestPath() {
 	QueueType qt;
 	int distance[ARRAY_SIZE],
 		parent[ARRAY_SIZE],
-		onQueue[ARRAY_SIZE];
+		onQueue[ARRAY_SIZE],
+		cnt[ARRAY_SIZE];
 	int v;
 
-	init(distance, parent, onQueue, &qt);
+	init(distance, parent, cnt, onQueue, &qt);
 
 	while(!isEmptyQueue(qt)) {
 		v = dequeue(&qt);
 		onQueue[v] = 0;
 
-		for(int i=0; i<ARRAY_SIZE; i++) {
+		for(int i=0; i<ARRAY_SIZE; ++i) {
 			if(weight[v][i] + distance[v] < distance[i]) {
 				distance[i] = weight[v][i] + distance[v];
+
+				cnt[i] = cnt[v] + 1;
+				if(cnt[i] > ARRAY_SIZE-1) {
+					printf("Negative cycle exists.\n");
+					exit(1);
+				}
+
 				if (!onQueue[i]) {
 					onQueue[i] = 1;
 					enqueue(&qt, i);
