@@ -13,6 +13,8 @@ public class exercise_10 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			String arr[] = br.readLine().split(" ");
+			br.close();
+
 			int A = Integer.parseInt(arr[0]),
 				B = Integer.parseInt(arr[1]),
 				C = Integer.parseInt(arr[2]);

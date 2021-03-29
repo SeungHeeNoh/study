@@ -14,6 +14,8 @@ public class exercise_09 {
 		
 		try {
 			String arr[] = br.readLine().split(" ");
+			br.close();
+
 			int a = Integer.parseInt(arr[0]),
 				b = Integer.parseInt(arr[1]);
 			
