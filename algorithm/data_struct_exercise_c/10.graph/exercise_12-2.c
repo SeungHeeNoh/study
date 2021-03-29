@@ -25,8 +25,10 @@ int getInDegree(int n) {
 	return result;
 }
 
-void main() {
+int main() {
+	printf("===Result===\n");
 	printf("in-degree of vertex %d : %d\n", 0, getInDegree(0));
 	printf("in-degree of vertex %d : %d\n", 3, getInDegree(3));
 	printf("in-degree of vertex %d : %d\n", 5, getInDegree(5));
+	return 0;
 }
