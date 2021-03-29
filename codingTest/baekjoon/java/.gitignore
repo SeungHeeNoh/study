@@ -1,6 +1,13 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,java,eclipse
+# Created by https://www.toptal.com/developers/gitignore/api/windows,eclipse,java,code-java
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,java,code-java
+
+### Code-Java ###
+# Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
+
+.project
+.classpath
+factoryConfiguration.json
 
 ### Eclipse ###
 .metadata
@@ -119,4 +126,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
+# End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java,code-java
