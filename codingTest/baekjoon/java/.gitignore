@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/windows,eclipse,java,code-java
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,java,code-java
+# Created by https://www.toptal.com/developers/gitignore/api/windows,eclipse,vscode,java,code-java
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,eclipse,vscode,java,code-java
 
 ### Code-Java ###
 # Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
@@ -100,6 +100,14 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+### vscode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -126,4 +134,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java,code-java
+# End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,vscode,java,code-java
