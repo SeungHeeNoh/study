@@ -26,6 +26,7 @@ public class Exercise_06 {
 			}
 			sb.append(sum).append("\n");
 		}
+		br.close();
 		System.out.println(sb);
 	}
 }
