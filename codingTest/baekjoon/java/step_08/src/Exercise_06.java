@@ -101,4 +101,30 @@ public class Exercise_06 {
 
 	// 	return apt[k][n];
 	// }
+
+	// ================== 128ms ==================
+	// public void run() throws IOException{
+	// 	int apt[][] = new int[15][14];
+	// 	for(int i=0; i<apt.length; i++) {
+	// 		for(int j=0; j<apt[i].length; j++) {
+	// 			if(i == 0) {
+	// 				apt[i][j] = j+1;
+	// 			}else if(j == 0) {
+	// 				apt[i][j] = 1;
+	// 			}else {
+	// 				apt[i][j] = apt[i][j-1] + apt[i-1][j];
+	// 			}
+	// 		}
+	// 	}
+
+	// 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	// 	int length = Integer.parseInt(br.readLine());
+	// 	while(length != 0) {
+	// 		int k = Integer.parseInt(br.readLine()),
+	// 			n = Integer.parseInt(br.readLine());
+	// 		System.out.println(apt[k][n-1]);
+	// 		length--;
+	// 	}
+	// 	br.close();
+	// }
 }
