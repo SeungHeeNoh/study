@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 // 		System.out.println(new DivMul(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())).getResult());
 // 		br.close();
 // 	}
-}
+// }
 
 class DivMul {
 	int m, n;
