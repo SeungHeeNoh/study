@@ -12,6 +12,7 @@ import static java.lang.Integer.parseInt;
 // 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 // 		System.out.println(new UpDown(parseInt(br.readLine()), parseInt(br.readLine()), parseInt(br.readLine()), parseInt(br.readLine()), parseInt(br.readLine())).getResult());
+// 		br.close();
 // 	}
 // }
 
