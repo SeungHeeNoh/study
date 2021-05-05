@@ -36,18 +36,20 @@ class Tablica {
 	public int getMinRotation() {
 		int n = 0;
 		double max = 0d;
-		double result[] = new double[4];
 
-		result[0] = a/c + b/d;
-		result[1] = c/d + a/b;
-		result[2] = d/b + c/a;
-		result[3] = b/a + d/c;
+		for(int i=0; i<4; i++) {
+			double temp;
 
-		for(int i=0; i<result.length; i++) {
-			if(max < result[i]) {
-				max = result[i];
+			if(max < (a/c + b/d)) {
+				max = a/c + b/d;
 				n = i;
 			}
+
+			temp = a;
+			a = c;
+			c = d;
+			d = b;
+			b = temp;
 		}
 		return n;
 	}
