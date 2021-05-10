@@ -1,6 +1,6 @@
 /*
  * ===문제 출처===
- * 6174, <http://220.89.64.243/30stair/6174/6174.php?pname=6174>.
+ * square, <http://220.89.64.243/30stair/square/square.php?pname=square>.
  * */
 import java.io.BufferedReader;
 import java.io.IOException;
