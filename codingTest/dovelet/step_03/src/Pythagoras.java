@@ -5,15 +5,15 @@
 import java.io.*;
 import static java.lang.Integer.parseInt;
 
-public class Main {
-	public static void main(String[] args) {
-		try(BufferedReader input = new BufferedReader(new InputStreamReader(System.in))) {
-			System.out.println(new Pythagoras(parseInt(input.readLine().trim())).getAB());
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-}
+// public class Main {
+// 	public static void main(String[] args) {
+// 		try(BufferedReader input = new BufferedReader(new InputStreamReader(System.in))) {
+// 			System.out.println(new Pythagoras(parseInt(input.readLine().trim())).getAB());
+// 		}catch(IOException e) {
+// 			e.printStackTrace();
+// 		}
+// 	}
+// }
 
 class Pythagoras {
 	int c;
