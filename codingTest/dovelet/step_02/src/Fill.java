@@ -2,9 +2,7 @@
  * ===문제 출처===
  * fill, <http://220.89.64.243/30stair/fill/fill.php?pname=fill>.
  * */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 import static java.lang.Float.*;
 
@@ -14,13 +12,13 @@ import static java.lang.Float.*;
 // 		StringTokenizer st = new StringTokenizer(br.readLine());
 // 		System.out.println(new Fill(parseFloat(st.nextToken()), parseFloat(st.nextToken()), parseFloat(st.nextToken())).getResult());
 // 		br.close();
-// 	}
-// }
+	}
+}
 
 class Fill {
-	float speed, weight, power;
+	private float speed, weight, power;
 
-	Player playerArr[] = {
+	private Player[] playerArr = {
 		new Player("Wide Receiver", 4.5f, 150f, 200f),
 		new Player("Lineman", 6.0f, 300f, 500f),
 		new Player("Quarterback", 5.0f, 200f, 300f)
@@ -38,11 +36,11 @@ class Fill {
 		StringBuilder sb = new StringBuilder();
 
 		for(int i=0; i<playerArr.length; i++) {
-			if(speed <= playerArr[i].speed && weight >= playerArr[i].weight && power >= playerArr[i].power) {
+			if(speed <= playerArr[i].getSpeed() && weight >= playerArr[i].getWeight() && power >= playerArr[i].getPower()) {
 				if(!sb.toString().equals("")) {
 					sb.append(" ");
 				}
-				sb.append(playerArr[i].position);
+				sb.append(playerArr[i].getPosition());
 			}
 		}
 
@@ -53,8 +51,8 @@ class Fill {
 }
 
 class Player {
-	String position;
-	float speed, weight, power;
+	private String position;
+	private float speed, weight, power;
 
 	Player() {}
 
@@ -63,5 +61,21 @@ class Player {
 		this.speed = speed;
 		this.weight = weight;
 		this.power = power;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public float getWeight() {
+		return weight;
+	}
+
+	public float getPower() {
+		return power;
 	}
 }
