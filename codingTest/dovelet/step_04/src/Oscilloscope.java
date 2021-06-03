@@ -24,28 +24,18 @@ class Oscilloscope {
 		int interval = 2*n;
 
 		for(int i=10; i>=-10; i--) {
-			if(-n <= i && i <= n) {
-				int count = 0;
-
-				outer : 
-				while(true) {
-					for(int j=0; j<interval; j++) {
-						if(i >= 0 && (j == n || i == j)) {
-							sb.append("*");
-						}else if(i < 0 && (j == n || 2*n+i == j)) {
-							sb.append("*");
-						}else {
-							sb.append(" ");
-						}
-						if(++count >= RANGE) break outer;
+			for(int j=0; j<RANGE; j++) {
+				if(-n <= i && i <= n) {
+					if((j%n == 0 && j%interval != 0)  || (i < 0 ? (interval - (j%interval) == -i) : j%interval == i)) {
+						sb.append("*");
+					}else {
+						sb.append(" ");	
 					}
-				}
-			}else {
-				for(int j=0; j<RANGE; j++) {
+				}else {
 					sb.append(" ");
 				}
 			}
-			
+
 			sb.append(String.format("|%3dV%n", i));
 		}
 
