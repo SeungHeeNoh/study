@@ -15,7 +15,7 @@ import java.util.HashSet;
 // public class Main {
 // 	public static void main(String[] args) {
 // 		try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-// 			new Amicable(parseInt(br.readLine().trim())).printAmicable();
+// 			new AmicableController(parseInt(br.readLine().trim())).run();
 // 		} catch (NumberFormatException e) {
 // 			e.printStackTrace();
 // 		} catch (IOException e) {
@@ -24,15 +24,41 @@ import java.util.HashSet;
 // 	}
 // }
 
-class Amicable {
+class AmicableView {
+	public void printAmicable(HashMap amicableMap) {
+
+		ArrayList<Integer> keyList = new ArrayList<>(amicableMap.keySet());
+		Collections.sort(keyList);
+
+		for(int key : keyList) {
+			System.out.print(key + " ");
+			ArrayList<Integer> subList = new ArrayList<>((HashSet<Integer>)amicableMap.get(key));
+			Collections.sort(subList);
+
+			for(int friendlyNumber : subList) {
+				System.out.print(friendlyNumber + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+
+class AmicableController {
 	private int n;
+	private AmicableModel am = new AmicableModel();
+	private AmicableView av = new AmicableView();
 
-	public Amicable() {}
-
-	public Amicable(int n) {
+	public AmicableController(int n) {
 		this.n = n;
 	}
 
+	public void run() {
+		HashMap amicableMap = am.getAmicaMap(n);
+		av.printAmicable(amicableMap);
+	}
+}
+
+class AmicableModel {
 	public int getDivisorSum(int number) {
 		int sum = 0;
 
@@ -46,7 +72,7 @@ class Amicable {
 		return sum;
 	}
 
-	public HashMap getAmicaMap() {
+	public HashMap getAmicaMap(int n) {
 		HashMap amicableMap = new HashMap();
 
 		for(int i=220; i<=n; i++) {
@@ -73,21 +99,4 @@ class Amicable {
 		return amicableMap;
 	}
 
-	public void printAmicable() {
-		HashMap amicableMap = getAmicaMap();
-
-		ArrayList<Integer> keyList = new ArrayList<>(amicableMap.keySet());
-		Collections.sort(keyList);
-
-		for(int key : keyList) {
-			System.out.print(key + " ");
-			ArrayList<Integer> subList = new ArrayList<>((HashSet<Integer>)amicableMap.get(key));
-			Collections.sort(subList);
-
-			for(int friendlyNumber : subList) {
-				System.out.print(friendlyNumber + " ");
-			}
-			System.out.println();
-		}
-	}
 }
