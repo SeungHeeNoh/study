@@ -30,15 +30,12 @@ class Quirk {
 	}
 
 	public void printQuirksomes() {
-		int start = 0,
-		 	end = (int)Math.pow(10, n/2);
+		int half = (int)Math.pow(10, n/2);
 		StringBuilder sb = new StringBuilder(100);
 
-		for(int i=start; i<end; i++) {
-			for(int j=start; j<end; j++) {
-				if((int)Math.pow(i+j, 2) == i*end+j) {
-					sb.append(String.format("%0"+(n/2)+"d", i)).append(String.format("%0"+(n/2)+"d", j)).append("\n");
-				}
+		for(int i=0; i*i<(int)Math.pow(10, n); i++) {
+			if(((i*i)/half + (i*i)%half) * ((i*i)/half + (i*i)%half) == i*i) {
+				sb.append(String.format("%0"+(n/2)+"d", (i*i)/half)).append(String.format("%0"+(n/2)+"d", (i*i)%half)).append("\n");
 			}
 		}
 
