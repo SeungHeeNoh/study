@@ -12,8 +12,8 @@ import static java.lang.Float.*;
 // 		StringTokenizer st = new StringTokenizer(br.readLine());
 // 		System.out.println(new Fill(parseFloat(st.nextToken()), parseFloat(st.nextToken()), parseFloat(st.nextToken())).getResult());
 // 		br.close();
-	}
-}
+// 	}
+// }
 
 class Fill {
 	private float speed, weight, power;
