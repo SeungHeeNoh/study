@@ -10,22 +10,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
-	public static void main(String[] args) {
-		try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			int[] order = new int[parseInt(st.nextToken())];
+// public class Main {
+// 	public static void main(String[] args) {
+// 		try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+// 			StringTokenizer st = new StringTokenizer(br.readLine());
+// 			int[] order = new int[parseInt(st.nextToken())];
 
-			for(int i=0; i<order.length; i++) {
-				order[i] = parseInt(st.nextToken());
-			}
+// 			for(int i=0; i<order.length; i++) {
+// 				order[i] = parseInt(st.nextToken());
+// 			}
 
-			System.out.println(new Meat(order).getResult());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-}
+// 			System.out.println(new Meat(order).getResult());
+// 		} catch (IOException e) {
+// 			e.printStackTrace();
+// 		}
+// 	}
+// }
 
 class Meat {
 	private int[] order;
