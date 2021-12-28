@@ -41,31 +41,25 @@ class Candy {
 	public String getResult() {
 		StringBuffer sb = new StringBuffer();
 		int processCount = 0,
-			candyCount = 0,
-			count = 0;
+			min = 0,
+			max = 0;
 		int[] resultArray = new int[array.length];
-		boolean flag = false;
 
 		for(int i=0; i<array.length; i++) {
 			if(i == 0) {
-				candyCount = array[i];
-				count++;
+				max = min = array[i];
 			} else {
-				if(candyCount != array[i]) {
-					break;
-				} else {
-					count++;
-				}
+				if(max < array[i]) max = array[i];
+				else if(min > array[i]) min = array[i];
 			}
 		}
 
-		if(count == array.length) {
-			flag = true;
-		}
-
-		while(!flag) {
+		while(min < max) {
 			processCount++;
-			count = 0;
+
+			int temp = min;
+			min = max;
+			max = temp;
 
 			for(int i=0; i<array.length; i++) {
 				int now = array[i]/2,
@@ -73,24 +67,14 @@ class Candy {
 
 				resultArray[i] = now+prev + (((now+prev)%2 == 0) ? 0 : 1);
 
-				if(i == 0) {
-					candyCount = resultArray[i];
-					count++;
-				} else {
-					if(candyCount == resultArray[i]) {
-						count++;
-					}
-				}
-			}
-
-			if(count == array.length) {
-				flag = true;
+				if(max < resultArray[i]) max = resultArray[i];
+				else if(min > resultArray[i]) min = resultArray[i];
 			}
 
 			array = Arrays.copyOf(resultArray, resultArray.length);
 		}
 
-		sb.append(processCount).append(" ").append(candyCount);
+		sb.append(processCount).append(" ").append(array[0]);
 
 		return sb.toString();
 	}
