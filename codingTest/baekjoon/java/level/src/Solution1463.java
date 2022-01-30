@@ -14,6 +14,7 @@ import java.util.Queue;
 // 		Queue<Solution1463> queue = new LinkedList<>();
 // 		int answer = 0;
 // 		int n = Integer.parseInt(br.readLine());
+// 		boolean[] used = new boolean[n+1];
 // 		int count = 0;
 // 		int value = n;
 
@@ -29,17 +30,20 @@ import java.util.Queue;
 // 				break;
 // 			}
 
-// 			if(value - 1 > 1) {
-// 				queue.offer(new Solution1463(count+1, value-1));
+// 			if(!used[value]) {
+// 				if(value - 1 > 1) {
+// 					queue.offer(new Solution1463(count+1, value-1));
+// 				}
+	
+// 				if(value%3 == 0) {
+// 					queue.offer(new Solution1463(count+1, value/3));
+// 				}
+	
+// 				if(value%2 == 0) {
+// 					queue.offer(new Solution1463(count+1, value/2));
+// 				}
 // 			}
-
-// 			if(value%3 == 0) {
-// 				queue.offer(new Solution1463(count+1, value/3));
-// 			}
-
-// 			if(value%2 == 0) {
-// 				queue.offer(new Solution1463(count+1, value/2));
-// 			}
+// 			used[value] = true;
 // 		}
 
 // 		System.out.println(answer);
