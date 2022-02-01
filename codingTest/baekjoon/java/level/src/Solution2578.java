@@ -60,7 +60,7 @@ import java.util.StringTokenizer;
 // 	}
 // }
 
-private class Point {
+class Point {
 	int x;
 	int y;
 
