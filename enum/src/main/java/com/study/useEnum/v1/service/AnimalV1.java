@@ -1,4 +1,4 @@
-package com.study.useEnum.service;
+package com.study.useEnum.v1.service;
 
 import javax.annotation.PostConstruct;
 
@@ -16,7 +16,7 @@ import com.study.useEnum.mapper.hamster.SyrianhamsterMapper;
 
 import lombok.RequiredArgsConstructor;
 
-public enum Animal {
+public enum AnimalV1 {
 	goldenRetriever("GoldenRetriever", "골든 리트리버")
   , dachshund("Dachshund", "닥스훈트")
   , labradoodle("Labradoodle", "렉돌")
@@ -31,7 +31,7 @@ public enum Animal {
 	private final String koName;
 	private AnimalMapper mapper;
 	
-	Animal(String enName, String koName) {
+	AnimalV1(String enName, String koName) {
 		this.enName = enName;
 		this.koName = koName;
 	}
@@ -63,14 +63,14 @@ public enum Animal {
 
         @PostConstruct
         public void postConstruct() {
-        	Animal.goldenRetriever.injectAnimalMapper(goldenRetrieverMapper);
-        	Animal.dachshund.injectAnimalMapper(dachshundMapper);
-        	Animal.labradoodle.injectAnimalMapper(labradoodleMapper);
-        	Animal.russianBlue.injectAnimalMapper(russianBlueMapper);
-        	Animal.goldfish.injectAnimalMapper(goldfishMapper);
-        	Animal.betta.injectAnimalMapper(bettaMapper);
-        	Animal.syrianhamster.injectAnimalMapper(syrianhamsterMapper);
-        	Animal.chinesehamster.injectAnimalMapper(chinesehamsterMapper);
+        	AnimalV1.goldenRetriever.injectAnimalMapper(goldenRetrieverMapper);
+        	AnimalV1.dachshund.injectAnimalMapper(dachshundMapper);
+        	AnimalV1.labradoodle.injectAnimalMapper(labradoodleMapper);
+        	AnimalV1.russianBlue.injectAnimalMapper(russianBlueMapper);
+        	AnimalV1.goldfish.injectAnimalMapper(goldfishMapper);
+        	AnimalV1.betta.injectAnimalMapper(bettaMapper);
+        	AnimalV1.syrianhamster.injectAnimalMapper(syrianhamsterMapper);
+        	AnimalV1.chinesehamster.injectAnimalMapper(chinesehamsterMapper);
         }
     }
 	

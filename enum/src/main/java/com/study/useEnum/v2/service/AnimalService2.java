@@ -1,4 +1,4 @@
-package com.study.useEnum.service;
+package com.study.useEnum.v2.service;
 
 import org.springframework.stereotype.Service;
 
@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AnimalService {
+public class AnimalService2 {
 	
-	public DataVo getAnimalData(Animal param) throws Exception {
+	public DataVo getAnimalData(AnimalV2 param) throws Exception {
 		return param.getMapper().getAnimalData();
 	}
 }
